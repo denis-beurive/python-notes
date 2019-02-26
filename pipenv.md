@@ -60,7 +60,9 @@ Example:
 
     pipenv install pytest
 
+# Uninstall a package
 
+    pipenv uninstall crypto
 
 
 
