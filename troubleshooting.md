@@ -14,7 +14,7 @@ This error may occur and you have no idea why.
 
 First I remove all the previously installed packages:
 
-    (email) ...$ pipenv uninstall
+    (email) ...$ pipenv uninstall --all
 
 Then, I make sure that a package that was installed has effectively been removed. For example (assuming that `pytest` was installed):
 
