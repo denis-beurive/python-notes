@@ -13,3 +13,4 @@ This repository contains some Python notes.
 * [conversions](conversions.md)
 * [dictionaries](dictionaries.md)
 * [strings](strings.md)
+* [factory](factory.md)
