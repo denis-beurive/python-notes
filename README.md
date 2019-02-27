@@ -14,3 +14,5 @@ This repository contains some Python notes.
 * [dictionaries](dictionaries.md)
 * [strings](strings.md)
 * [factory](factory.md)
+
+
