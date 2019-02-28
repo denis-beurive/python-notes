@@ -1,6 +1,8 @@
 # Troubleshooting
 
-## Check whether a package is installed or not
+## Python
+
+### Check whether a package is installed or not
 
     python -c 'help("modules")' | grep <name of the package>
 
@@ -8,7 +10,9 @@ Or, for example:
 
     (email) ...$ find "$(pipenv --venv)/lib" -name "*pytest*"
 
-## Pipenv: locking failed!
+## Pipenv
+
+### Locking failed!
 
 This error may occur and you have no idea why.
 
@@ -30,4 +34,15 @@ Delete the file `Pipfile.lock`:
 
 Then try to install the packages again.
 
+### Cannot import name 'Template'
+
+If you use the versions (_or greater_) of `pip` and `pipenv` listed below :
+
+    $ pipenv --version
+    pipenv, version 2018.11.26
+
+    $ pip --version
+    pip 19.0.3 from /usr/local/lib/python3.6/site-packages/pip (python 3.6)
+
+Then make sure that there is no file named "`string.py`" in the current directory that shadows the package "`string`"!
 
