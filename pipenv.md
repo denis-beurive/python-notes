@@ -1,4 +1,4 @@
-# Install
+# Install pipenv
 
     pip install --user pipenv
 
@@ -12,11 +12,16 @@ Thus, set the user PATH environment variable accordingly (into `~/.bashrc`):
 
     export PATH="${HOME}/.local/bin/:${PATH}"
 
-# Set the version of Python to use
+# Create a virtual environment for a project
 
-This command below creates a virtual environment (_virtualenv_) for a project. Go the  root directory of the project and run:
+    cd /the/project/directory
+    pipenv install --python 3.6.4
 
-    pipenv --python 3.6.4
+> See [this link](https://pipenv.readthedocs.io/en/latest/) for all the available options.
+
+This will create two new files, `Pipfile` and `Pipfile.lock`, in your project directory, and a new virtual environment for your project if it doesn’t exist already.
+
+> Here, we specify that we want to use Python version `3.6.4` (instead of the default version of Python available on this host).
 
 > This command assumes that `python 3.6.4` is already installed.
 
@@ -29,6 +34,67 @@ To activate a virtual environment bound to a project, go to the root directory o
     pipenv shell
 
 Within this shell, all Python related commands will refer to the version of Python specified by the command `pipenv --python`.
+
+# Get the path to the directory the contains a virtual environment configuration
+
+    $ pipenv --venv
+    /home/dev/.local/share/virtualenvs/tmp-SWmmaX4T
+
+    $ ls /home/dev/.local/share/virtualenvs/tmp-SWmmaX4T
+    bin  include  lib
+
+As you can see, the directory contains all the "elements" that defines a Python environment.
+
+# Get the path to the project associated with the current virtual environment
+
+    pipenv --where
+
+# Get the list of environment variables use by pipenv
+
+This command can be really useful.
+
+    $ pipenv --envs
+    The following environment variables can be set, to do various things:
+
+      - PIPENV_IS_CI
+      - PIPENV_CACHE_DIR
+      - PIPENV_COLORBLIND
+      - PIPENV_DEFAULT_PYTHON_VERSION
+      - PIPENV_DONT_LOAD_ENV
+      - PIPENV_DONT_USE_PYENV
+      - PIPENV_DOTENV_LOCATION
+      - PIPENV_EMULATOR
+      - PIPENV_HIDE_EMOJIS
+      - PIPENV_IGNORE_VIRTUALENVS
+      - PIPENV_INSTALL_TIMEOUT
+      - PIPENV_MAX_DEPTH
+      - PIPENV_MAX_RETRIES
+      - PIPENV_MAX_ROUNDS
+      - PIPENV_MAX_SUBPROCESS
+      - PIPENV_NO_INHERIT
+      - PIPENV_NOSPIN
+      - PIPENV_SPINNER
+      - PIPENV_PIPFILE
+      - PIPENV_PYPI_MIRROR
+      - PIPENV_SHELL_EXPLICIT
+      - PIPENV_SHELL_FANCY
+      - PIPENV_TIMEOUT
+      - PIPENV_VENV_IN_PROJECT
+      - PIPENV_YES
+      - PIPENV_SKIP_LOCK
+      - PIPENV_PYUP_API_KEY
+      - PIPENV_PYTHON
+      - PIPENV_TEST_INDEX
+      - PIPENV_USE_SYSTEM
+      - PIPENV_VIRTUALENV
+      - PIPENV_SKIP_VALIDATION
+      - PIPENV_SHELL
+      - PIPENV_VERBOSITY
+      - PIPENV_SPINNER_FAIL_TEXT
+      - PIPENV_SPINNER_OK_TEXT
+
+    You can learn more at:
+       http://docs.pipenv.org/advanced/#configuration-with-environment-variables
 
 # Pipenv on a remote host with PyCharm (2018.3)
 
