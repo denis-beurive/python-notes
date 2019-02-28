@@ -13,6 +13,6 @@ This repository contains some Python notes.
 * [conversions](conversions.md)
 * [dictionaries](dictionaries.md)
 * [strings](strings.md)
+* [regular expressions](regex.md)
 * [factory](factory.md)
-
 
