@@ -155,6 +155,14 @@ Example:
 
     pipenv uninstall crypto
 
+# Uninstall all installed packages
 
+    pipenv uninstall --all
+
+# Install a "local package" into your virtual environment
+
+    pipenv install -e .
+
+> See [this tutorial](https://python-packaging.readthedocs.io/en/latest/minimal.html).
 
 
