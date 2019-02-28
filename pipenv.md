@@ -47,7 +47,8 @@ As you can see, the directory contains all the "elements" that defines a Python 
 
 # Get the path to the project associated with the current virtual environment
 
-    pipenv --where
+    (tmp) dev@unassigned-hostname:~/tmp$ pipenv --where
+    /home/dev/tmp
 
 # Get the list of environment variables use by pipenv
 
