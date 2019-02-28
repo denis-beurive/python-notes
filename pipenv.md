@@ -19,7 +19,7 @@ See [this discussion](https://github.com/pypa/pipenv/issues/2615).
 * a project is materialised by the presence of a file called "`Pipfile`".
 * `pipenv` associates a virtual environment to the presence of a file called "`Pipfile`".
 
-Thus, **there is a _bijective relationship_ between "projects" and "virtual environments"**: a project is associated to one and only one virtual environment. And a virtual environment is associated to one and only one poject.
+Thus, **there is a _bijective relationship_ between "projects" and "virtual environments"**: a project is associated with one and only one virtual environment. And a virtual environment is associated with one and only one poject.
 
 Although the concept of _virtual environment_ and the concept of _project_ are not identical, we can say that these expressions ("virtual environment" and "project") are interchangeable - since one is always associated with the other.
 
