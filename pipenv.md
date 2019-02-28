@@ -12,7 +12,18 @@ Thus, set the user PATH environment variable accordingly (into `~/.bashrc`):
 
     export PATH="${HOME}/.local/bin/:${PATH}"
 
-# Create a virtual environment for a project
+# For pipenv, a project \_IS\_ a virtual environment... so to speak
+
+See [this discussion](https://github.com/pypa/pipenv/issues/2615).
+
+* a project is materialised by the presence of a file called "`Pipfile`".
+* `pipenv` associates a virtual environment to the presence of a file called "`Pipfile`".
+
+Thus, **there is a _bijective relationship_ between "projects" and "virtual environments"**: a project is associated to one and only one virtual environment. And a virtual environment is associated to one and only one poject.
+
+Although the concept of _virtual environment_ and the concept of _project_ are not identical, we can say that these expressions ("virtual environment" and "project") are interchangeable - since one is always associated with the other.
+
+# Create a "virtual environment / project"
 
     cd /the/project/directory
     pipenv install --python 3.6.4
@@ -25,17 +36,25 @@ This will create two new files, `Pipfile` and `Pipfile.lock`, in your project di
 
 > This command assumes that `python 3.6.4` is already installed.
 
-Once a virtual environment has been created for the project, we can activate it. See [Activate a virtual environment](#activate-a-virtual-environment).
+Once a "_virtual environment / project_" has been created, we can activate it. See [Activate a virtual environment](#activate-a-virtual-environment).
+
+# Delete a "virtual environment / project"
+
+To run the command below, you must be in the project directory tree (which contains the file called "Pipfile" at its top).
+
+    pipenv --rm
 
 # Activate a virtual environment
 
-To activate a virtual environment bound to a project, go to the root directory of the project and run the command below:
+To activate a virtual environment (bound to a project), go to the root directory of the project and run the command below:
 
     pipenv shell
 
 Within this shell, all Python related commands will refer to the version of Python specified by the command `pipenv --python`.
 
-# Get the path to the directory the contains a virtual environment configuration
+# Get the path to the directory that contains a "virtual environment / project" configuration
+
+To run the command below, you must be in the project directory tree (which contains the file called "Pipfile" at its top).
 
     $ pipenv --venv
     /home/dev/.local/share/virtualenvs/tmp-SWmmaX4T
@@ -49,6 +68,11 @@ As you can see, the directory contains all the "elements" that defines a Python 
 
     (tmp) dev@unassigned-hostname:~/tmp$ pipenv --where
     /home/dev/tmp
+
+# Path to the python interpreter assigned to the current "virtual environment / project"
+
+    $ ls -l $(pipenv --py)
+    lrwxrwxrwx 1 dev dev 9 Feb 28 10:47 /home/dev/.local/share/virtualenvs/tmp-SWmmaX4T/bin/python -> python3.6
 
 # Get the list of environment variables use by pipenv
 
