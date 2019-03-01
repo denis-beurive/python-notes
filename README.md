@@ -3,6 +3,7 @@
 This repository contains some Python notes.
 
 * [pipenv](pipenv.md)
+* [pycharm](pycharm.md)
 * [troubleshooting](troubleshooting.md)
 * [operators](operators.md)
 * [debug](debug.md)
