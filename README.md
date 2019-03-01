@@ -9,6 +9,7 @@ This repository contains some Python notes.
 * [environment](environment.md)
 * [lists](lists.md)
 * [files](files.md)
+* [directories](directories.md)
 * [serialization](serialization.md)
 * [conversions](conversions.md)
 * [dictionaries](dictionaries.md)
