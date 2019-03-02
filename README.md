@@ -17,7 +17,7 @@ This repository contains some Python notes.
 * [strings](strings.md)
 * [regular expressions](regex.md)
 * [factory](factory.md)
-* [comprehensions]()
+* [comprehensions](comprehensions.md)
 
 Sets vs Lists and Tuples
 
