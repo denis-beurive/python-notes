@@ -2,6 +2,16 @@
 
 This document contains useful information for using PyCharm.
 
+# Configuring a remote Python interpreter
+
+![Project Interpreter Dettings](images/pycharm-project-interpreter-settings.png)
+
+> Please note that if the remote host is a VM running on the same host as the one running PyCharm (let's call it, the "_editor host_"), then you probably used a shared directory (between the VM and the "_editor host_"). In this case, you don't need to configure any _deployment settings_ ("`Build, Extension, Deployment`" => "`Deployment`": leave everything empty).
+
+# Configuring the docstring format
+
+![Python Integrated Tools Settings](images/pycharm-docstring-settings.png)
+
 # Comments used to configure the code analysis
 
 This list comes for the [excellent document](https://gist.github.com/pylover/7870c235867cf22817ac5b096defb768).
