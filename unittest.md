@@ -27,7 +27,18 @@
 
     python -m unittest testfile.py
 
-> You have to be in **the same directory as the file that implements the unit test** ! Indeed, if you try to execute the command `python3 -m unittest ./tests/testfile.py`, then `unittest` will interpret "tests" as if it were a namespace. And you will end up with "`ValueError: Empty module name`".
+_By default_, you have to be in **the same directory as the file that implements the unit test** ! Indeed, if you try to execute the command `python3 -m unittest ./tests/testfile.py`, then `unittest` will try to load the **module** `tests.testfile`.
+
+You can specify the path to the Python script that implements the unit tests. However, to do that, you must set the environment variable `PYTHONPATH` so that Python knowns where to look for the namespace "tests". For example, assuming that we have the following directory tree:
+
+    /home/dev/projects/email
+    └── tests
+        └── testfile.py
+
+Then, you can run:
+
+    $ PYTHONPATH=/home/dev/projects/email
+    $ python -m unittest tests/testfile.py
 
 ### Automatisation
 
