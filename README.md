@@ -6,6 +6,7 @@ This repository contains some Python notes.
 * [pycharm](pycharm.md)
 * [troubleshooting](troubleshooting.md)
 * [unittest](unittest.md)
+* [package](package.md)
 * [operators](operators.md)
 * [debug](debug.md)
 * [environment](environment.md)
