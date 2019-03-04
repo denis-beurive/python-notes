@@ -23,10 +23,16 @@ Example:
 
 In this example:
 
-* **`v1`**: first mandatory positional argument.
-* **`criteria`**: hold zero or more optional positional arguments.
-* **`p1`** and **`p2`**: mandotory named arguments.
-* **`kwargs`**: hold zero or more optional named arguments.
+* **outer**:
+    * **`v1`**: first mandatory positional argument.
+    * **`criteria`**: hold zero or more optional positional arguments.
+    * **`p1`** and **`p2`**: mandotory named arguments.
+    * **`kwargs`**: hold zero or more optional named arguments.
+* **inner**:
+    * **`criteria`**: hold zero or more optional positional arguments.
+    * **`p1`** and **`p2`**: mandotory named arguments.
+    * **`p3`**: optional named arguments.
+    * **`kwargs`**: hold zero or more optional named arguments.
 
 Result:
 
