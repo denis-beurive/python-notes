@@ -8,6 +8,7 @@ This repository contains some Python notes.
 * [unittest](unittest.md)
 * [package](package.md)
 * [operators](operators.md)
+* [unpack / splat](unpack.md)
 * [debug](debug.md)
 * [environment](environment.md)
 * [lists](lists.md)

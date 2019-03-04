@@ -38,3 +38,11 @@ Compare:
     lst2 = [10, 11, 12, 13, 14]
     if lst1 != lst2:
         print("Not identical!") # Not identical
+
+The operator `*`:
+
+    l = [2, 4, 6] * 2
+    print(','.join(map(lambda x: str(x), l))) # => 2,4,6,2,4,6
+
+> It makes the list longer!
+
