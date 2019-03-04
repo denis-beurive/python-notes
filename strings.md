@@ -39,6 +39,10 @@ Splitting based on a regular expression:
     print(text[:3])  # => ABC
     print(text[3:])  # => DEFGHIJKLMNOPQRSTUVWXYZ
 
+## The operator *
+
+    text = 'x' * 3
+    print(text) # => xxx
 
 
 
