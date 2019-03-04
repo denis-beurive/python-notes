@@ -42,6 +42,29 @@ ex6:
     f(*[10, 20, 30]) # => 3: 10,20,30
     f(100, 200, 300) # => 3: 100,200,300
 
+ex7:
+
+    def outer(*criteria):
+        print(f'outer:  criteria      = {pformat(criteria)}')
+        print(f'        len(criteria) = {len(criteria)}')
+        print(f'        criteria[0]   = {pformat(criteria[0])}')
+        inner(*criteria, 10)
+
+    def inner(*criteria):
+        print(f'inner:  criteria = {pformat(criteria)}')
+
+    params = [10, 20, 30]
+    print(f'params = {pformat(params)}')
+    outer(*params)
+
+Reasul:
+
+    params = [10, 20, 30]
+    outer:  criteria      = (10, 20, 30)
+            len(criteria) = 3
+            criteria[0]   = 10
+    inner:  criteria = (10, 20, 30, 10)
+    
 ## With dictionaries
 
 Watch out! The dictionary behaves like a list!
