@@ -1,5 +1,7 @@
 # Generator expression
 
+See [PEP 289 -- Generator Expressions](https://www.python.org/dev/peps/pep-0289/)
+
     from typing import Generator, List
 
     r: List = [x for x in range(0, 10)]
