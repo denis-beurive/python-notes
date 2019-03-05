@@ -22,6 +22,7 @@ This repository contains some Python notes.
 * [regular expressions](regex.md)
 * [factory](factory.md)
 * [comprehensions](comprehensions.md)
+* [generator expression](generator_expression.md)
 
 **Tuples vs Lists**
 

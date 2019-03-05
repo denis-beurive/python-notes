@@ -22,3 +22,23 @@ String to bytes:
     s = 'abcd'
     ints = [ord(c) for c in s]
     b = bytes(bytearray(ints))
+
+Map opject to list:
+
+    r = map(lambda x: 2*x, [1, 3])
+    print(r.__class__.__name__) # => map
+
+    r: List[int] = list(map(lambda x: 2*x, [1, 3]))
+    pprint(r) # => [2, 6]
+
+Generator to list:
+
+    from typing import Generator, List
+
+    r: Generator = (x for x in range(0, 10))
+    print(r.__class__.__name__) # => generator
+
+    r = list((x for x in range(0, 10)))
+    print(r.__class__.__name__) # => list
+
+    
