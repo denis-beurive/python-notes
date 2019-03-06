@@ -2,11 +2,19 @@
 
 This repository contains some Python notes.
 
+## Tools
+
 * [pipenv](pipenv.md)
 * [pycharm](pycharm.md)
-* [troubleshooting](troubleshooting.md)
 * [unittest](unittest.md)
+
+## Code organisation
+
 * [package](package.md)
+* [factory](factory.md)
+
+## Language
+
 * [operators](operators.md)
 * [function](function.md)
 * [unpack / splat](unpack.md)
@@ -15,14 +23,21 @@ This repository contains some Python notes.
 * [lists](lists.md)
 * [files](files.md)
 * [directories](directories.md)
-* [serialization](serialization.md)
 * [conversions](conversions.md)
 * [dictionaries](dictionaries.md)
 * [strings](strings.md)
 * [regular expressions](regex.md)
-* [factory](factory.md)
 * [comprehensions](comprehensions.md)
 * [generator expression](generator_expression.md)
+
+# Packages
+
+* [cli parsing](cli-parsing.md)
+* [serialization](serialization.md)
+
+# Other
+
+* [troubleshooting](troubleshooting.md)
 
 **Tuples vs Lists**
 
