@@ -4,9 +4,38 @@ This document contains useful information for using PyCharm.
 
 # Configuring a remote Python interpreter
 
+`File` **>** `Settings` **>** `Project Interpreter`
+
 ![Project Interpreter Dettings](images/pycharm-project-interpreter-settings.png)
 
-> Please note that if the remote host is a VM running on the same host as the one running PyCharm (let's call it, the "_editor host_"), then you probably used a shared directory (between the VM and the "_editor host_"). In this case, you don't need to configure any _deployment settings_ ("`Build, Extension, Deployment`" => "`Deployment`": leave everything empty).
+`Label[Project Interpreter]` **>** `Add`
+
+![Add Project Interpreter](images/pycharm-add-project-interpreter.png)
+
+Select `SSH Interpreter`
+
+![SSH interpreter](images/pycharm-configure-ssh-interpreter.png)
+
+`Next` : set the network configuration for SSH.
+
+![Configure SSH](images/pycharm-configure-ssh.png)
+
+`Next` : set the credentials for SSH.
+
+![Configure SSH authentiction](images/pycharm-ssh-auth.png)
+
+`Next` : configure the interpreter.
+
+> Make sure to specify the Python interpreter bound to the Pipven environment !
+
+    (thermo) dev@unassigned-hostname:~/projects/thermo$ which python
+    /home/dev/.local/share/virtualenvs/thermo-hZt1O9lB/bin/python
+
+![Set path to the remote interpreter](images/pycharm-remote-interpreter-path.png)
+
+> If you are using a VM, then you should have set a shared folder. If that's the case then you would like to uncheck "_Automatically upload project files to the server_"
+
+> Please note that if the remote host is a VM running on the same host as the one running PyCharm (let's call it, the "_editor host_"), then you probably used a shared directory (between the VM and the "_editor host_"). In this case, you don't need to configure any _deployment settings_ ("`Build, Extension, Deployment`" => "`Deployment`": **leave everything empty**).
 
 # Configuring the docstring format
 

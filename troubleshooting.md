@@ -4,11 +4,22 @@
 
 ### Check whether a package is installed or not
 
-    python -c 'help("modules")' | grep <name of the package>
+#### Solution 1
 
-Or, for example:
+    $ pipenv shell
+    $ python -c "import googleapiclient.discovery"
 
-    (email) ...$ find "$(pipenv --venv)/lib" -name "*pytest*"
+> This solution is the best one.
+
+#### Solution 2
+
+    $ pipenv shell
+    $ python -c 'help("modules")' | grep googleapiclient
+
+#### Solution 3
+
+    $ pipenv shell
+    $ python -c 'help("modules")' | grep googleapiclient
 
 ## Pipenv
 
