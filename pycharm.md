@@ -12,13 +12,9 @@ This document contains useful information for using PyCharm.
 
 ![Add Project Interpreter](images/pycharm-add-project-interpreter.png)
 
-Select `SSH Interpreter`
+Select `SSH Interpreter` : set the network configuration for SSH.
 
 ![SSH interpreter](images/pycharm-configure-ssh-interpreter.png)
-
-`Next` : set the network configuration for SSH.
-
-![Configure SSH](images/pycharm-configure-ssh.png)
 
 `Next` : set the credentials for SSH.
 
