@@ -33,6 +33,18 @@ Select `SSH Interpreter` : set the network configuration for SSH.
 
 > Please note that if the remote host is a VM running on the same host as the one running PyCharm (let's call it, the "_editor host_"), then you probably used a shared directory (between the VM and the "_editor host_"). In this case, you don't need to configure any _deployment settings_ ("`Build, Extension, Deployment`" => "`Deployment`": **leave everything empty**).
 
+# Configuration deployment over FTP
+
+If you work on a remote host, then you must set up a mechanism used to deploy the project sources.
+
+There is one thing to know: 
+
+The _deployment path_ (`Build, Execution, Deployment` **=>** `Deployment` **=>** [`Mappings`] ) is relative to the _root path_ (`Build, Execution, Deployment` **=>** `Deployment` **=>** [`Connection`]).
+
+![Deployment Connecion](images/deploument-ftp-connection.png)
+
+![Deployment Deployment](images/deployment-ftp-mappings.png)
+
 # Configuring the docstring format
 
 ![Python Integrated Tools Settings](images/pycharm-docstring-settings.png)
