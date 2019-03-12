@@ -28,6 +28,7 @@ DocStrings:
 
 * [operators](operators.md)
 * [function](function.md)
+* [type chacking](type_checks.md)
 * [unpack / splat](unpack.md)
 * [debug](debug.md)
 * [environment](environment.md)
