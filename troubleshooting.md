@@ -71,5 +71,5 @@ First, check if the libraries show up in the remote interpreter configuration pa
 
 If the libraries show up, then it means that the editor knows about them, but the cache was not up to date. You should invalidate the cache:
 
-![Invalidate the cache](pycharm-invalidate-cache.png)
+![Invalidate the cache](images/pycharm-invalidate-cache.png)
 
