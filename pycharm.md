@@ -45,6 +45,12 @@ The _deployment path_ (`Build, Execution, Deployment` **=>** `Deployment` **=>**
 
 ![Deployment Deployment](images/deployment-ftp-mappings.png)
 
+# Configuring the code inspection
+
+![Code inspection](images/pycharm-code-inspection-py-version.png)
+
+> These configuration panel allows you to configure the version of python against which the editor should perform its inspection.
+
 # Configuring the docstring format
 
 ![Python Integrated Tools Settings](images/pycharm-docstring-settings.png)
