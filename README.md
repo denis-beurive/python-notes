@@ -8,10 +8,21 @@ This repository contains some Python notes.
 * [pycharm](pycharm.md)
 * [unittest](unittest.md)
 
+## Style guides
+
+General:
+
+* [Google Python Style Guide](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)
+
+DocStrings:
+
+* [PEP 257: Docstring Conventions](https://www.python.org/dev/peps/pep-0257/)
+* [Google Python Style Guide: docstrings](https://github.com/google/styleguide/blob/gh-pages/pyguide.md#381-docstrings)
+* [Example Google style docstrings](https://gist.github.com/candlewill/fce04bb26d402288cd02f09bd4f5f562)
+
 ## Code organisation
 
 * [package](package.md)
-* [factory](factory.md)
 
 ## Language
 
@@ -30,6 +41,10 @@ This repository contains some Python notes.
 * [comprehensions](comprehensions.md)
 * [generator expression](generator_expression.md)
 
+# Design patterns
+
+* [factory](factory.md)
+
 # Packages
 
 * [cli parsing](cli-parsing.md)
@@ -37,6 +52,7 @@ This repository contains some Python notes.
 
 # Other
 
+* [declaring the source encoding](encoding.md)
 * [troubleshooting](troubleshooting.md)
 
 **Tuples vs Lists**
