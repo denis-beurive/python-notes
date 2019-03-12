@@ -57,3 +57,19 @@ If you use the versions (_or greater_) of `pip` and `pipenv` listed below :
 
 Then make sure that there is no file named "`string.py`" in the current directory that shadows the package "`string`"!
 
+## PyCharm
+
+### Force the re-indexing of all libraries
+
+Sometimes, particularly when using remote interpreters, remote libraries are ignored by the code editor.
+
+If this the the case then:
+
+First, check if the libraries show up in the remote interpreter configuration panel.
+
+![Remote packages](images/pycharm-remote-packages.png)
+
+If the libraries show up, then it means that the editor knows about them, but the cache was not up to date. You should invalidate the cache:
+
+![Invalidate the cache](pycharm-invalidate-cache.png)
+
