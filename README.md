@@ -27,6 +27,7 @@ DocStrings:
 ## Language
 
 * [operators](operators.md)
+* [documentation](documentation.md)
 * [function](function.md)
 * [type checking](type_checks.md)
 * [unpack / splat](unpack.md)
