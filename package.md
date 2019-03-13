@@ -25,7 +25,7 @@ or:
         import os
         sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir))
 
-> If you use PyCharm, then you can tell the editor where to look for packages.
+> If you use PyCharm, then you can tell the editor where to look for packages ([see this link](https://github.com/denis-beurive/python-notes/blob/master/pycharm.md#configuring-pythonpath)).
 
 ## \_\_pycache\_\_
 

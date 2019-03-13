@@ -61,13 +61,15 @@ This configuration works whether you are using a local or a remote interpreter.
 
 `File` **>** `Settings` **>** `Project Interpreter`
 
+`Label[Project Interpreter]` **>** `Show All`
+
 ![PythonPath 1](images/pycharm-pythonpath-1.png)
 
-`Label[Project Interpreter]` **>** `Show All`
+Select the interpreter to configure, and then click on the icon with the subtext: `Show Paths for the selected interpreter`.
 
 ![PythonPath 2](images/pycharm-pythonpath-2.png)
 
-Select the interpreter to configure, and then click on the icon with the subtext: `Show Paths for the selected interpreter`.
+Then, click on '`+`' and add the path:
 
 ![PythonPath 3](images/pycharm-pythonpath-3.png)
 
