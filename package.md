@@ -8,6 +8,25 @@ Basically, a package is a directory with a bunch of Python files ("`.py`").
 
 **From Python 3.3** (included), the file "`__init__.py`" is not required anymore. See [PEP 420 -- Implicit Namespace Packages](https://www.python.org/dev/peps/pep-0420/).
 
+## Setting path
+
+The environment variable that lists all tops of packages directories trees is `PYTHONPATH`.
+
+For some specific use cases, it can be interesting to dynamically set this information:
+
+    import sys
+    import os
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir))
+
+or:
+
+    if __name__ == "__main__":
+        import sys
+        import os
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), os.path.pardir))
+
+> If you use PyCharm, then you can tell the editor where to look for packages.
+
 ## \_\_pycache\_\_
 
     find ./ -type d -name "__pycache__" -print

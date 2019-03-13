@@ -55,6 +55,22 @@ The _deployment path_ (`Build, Execution, Deployment` **=>** `Deployment` **=>**
 
 ![Python Integrated Tools Settings](images/pycharm-docstring-settings.png)
 
+# Configuring PYTHONPATH
+
+This configuration works whether you are using a local or a remote interpreter.
+
+`File` **>** `Settings` **>** `Project Interpreter`
+
+![PythonPath 1](images/pycharm-pythonpath-1.png)
+
+`Label[Project Interpreter]` **>** `Show All`
+
+![PythonPath 2](images/pycharm-pythonpath-2.png)
+
+Select the interpreter to configure, and then click on the icon with the subtext: `Show Paths for the selected interpreter`.
+
+![PythonPath 3](images/pycharm-pythonpath-3.png)
+
 # Comments used to configure the code analysis
 
 This list comes for the [excellent document](https://gist.github.com/pylover/7870c235867cf22817ac5b096defb768).
