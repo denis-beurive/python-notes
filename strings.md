@@ -44,5 +44,81 @@ Splitting based on a regular expression:
     text = 'x' * 3
     print(text) # => xxx
 
+## Formatting
+
+Very good link: [PyFormat](https://pyformat.info/)
+
+### `__str__` vs `__repr__`
+
+    from typing import List
+
+    class Data:
+
+        def __init__(self, value: List[int]):
+            self._data = value
+
+        def __str__(self):
+            return '[' + ', '.join(map(lambda x: f'<{str(x)}>', self._data)) + ']'
+
+        def __repr__(self):
+            return 'Data(' + ', '.join(map(lambda x: f'<{str(x)}>', self._data)) + ')'
+
+    d = Data([2, 4, 6])
+
+    # !s call __str__
+    # !r call __repr__
+
+    print("{!s}\n{!r}".format(d, d))
+
+Result:
+
+    [<2>, <4>, <6>]
+    Data(<2>, <4>, <6>
+
+### Align left, rigth, center
+
+    print('[{:>5}]'.format('x'))
+    print('[{:<5}]'.format('x'))
+    print('[{:^5}]'.format('x'))
+
+    print('[{:->5}]'.format('x'))
+    print('[{:-<5}]'.format('x'))
+    print('[{:-^5}]'.format('x'))
+
+Result:
+
+    [    x]
+    [x    ]
+    [  x  ]
+    [----x]
+    [x----]
+    [--x--]
+
+### Truncating
+
+    print('{:.3}'.format('abcdef')) # => abc
+
+Truncating can be mixed with the alignment:
+
+    print('{:-^11.3}'.format('abcdef')) # => ----abc----
+
+### Named placeholders
+
+    print('{a} {b}'.format(a=10, b=20)) # => 10 20
+    data = {'a':40, 'b':80}
+    print('{a} {b}'.format(**data)) # => 40 80
+
+### Parametrized formats
+
+This can be very handy:
+
+    print('[{:{fill}{align}{width}}]'.format('x', fill='-', align='^', width='9'))
+
+Result:
+
+    [----x----]
+
+
+
 
 
