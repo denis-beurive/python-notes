@@ -32,6 +32,11 @@ Splitting based on a regular expression:
 
     print('|'.join([tokens[i] for i in range(0, len(tokens), 2)])) # => AB|CDE|FGH|J|1|2|3|4
 
+## Search and replace using a regexp
+
+    import re
+    print(re.sub(' +', ' ', '1   3   5   7')) # => 1 3 5 7
+
 ## Slicing
 
     text = ''.join(map(lambda x: chr(x), range(65, 65+26))) # => ABCDEFGHIJKLMNOPQRSTUVWXYZ
