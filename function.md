@@ -1,5 +1,7 @@
 # Function
 
+## Arguments
+
 Example:
 
     def outer(v1, *criteria, p1, p2, **kwargs):
@@ -47,4 +49,72 @@ Result:
                  p2 = 200
                  p3 = 1000
              kwargs = {}
+
+## Inner functions
+
+    def outer_function():
+
+        def inner_function():
+            print('This is inner_function')
+
+        inner_function()
+
+    outer_function() # => This is inner_function
+
+## Functions names are variables
+
+    def f():
+        print('This is f')
+
+    def g():
+        print('This is g')
+
+    def h():
+        return g
+
+    f()   # => This is f
+    g()   # => This is g
+    f=h()
+    f()   # => This is g
+
+## Function composition
+
+See [Function composition](https://en.wikipedia.org/wiki/Function_composition)
+
+    from typing import Callable
+
+    def f(x: int) -> int:
+        return 2*x
+
+    def g(x: int) -> int:
+        return x+3
+
+    def composition(f: Callable[[int], int], g: Callable[[int], int]) -> Callable[[int], int]:
+
+        def fog(x: int) -> int:
+            return f(g(x))
+
+        return fog
+
+    # h(x) = 2*(x+3)
+    h = composition(f, g)
+    # h(3) = 2*(3+3) = 12
+    print(f'fog(3) = {h(3)}') # => fog(3) = 12
+
+## Function composition => decorators!
+
+    from typing import Callable
+
+    def f(function: Callable[[int], int]) -> Callable[[int], int]:
+        return lambda x: 2*function(x)
+
+    @f
+    def g(x: int) -> int:
+        return x+3
+
+    print(f'fog(3) = {g(3)}') # fog(3) = 12
+
+
+
+
 
