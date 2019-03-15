@@ -28,7 +28,7 @@ DocStrings:
 
 * [operators](operators.md)
 * [documentation](documentation.md)
-* [function](function.md)
+* [functions / decorators](function.md)
 * [type checking](type_checks.md)
 * [unpack / splat](unpack.md)
 * [debug](debug.md)
@@ -42,6 +42,7 @@ DocStrings:
 * [regular expressions](regex.md)
 * [comprehensions](comprehensions.md)
 * [generator expression](generator_expression.md)
+* [named tuple](namedtuple.md)
 
 # Design patterns
 
