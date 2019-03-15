@@ -55,7 +55,7 @@ DocStrings:
 
 **Good packages**:
 
-* [CLI parser: Click][https://click.palletsprojects.com/en/7.x/]
+* [CLI parser: Click](https://click.palletsprojects.com/en/7.x/)
 
 # Other
 
