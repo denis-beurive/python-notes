@@ -52,6 +52,10 @@ DocStrings:
 * [cli parsing](cli-parsing.md)
 * [serialization](serialization.md)
 
+**Good packages**:
+
+* [CLI parser: Click][https://click.palletsprojects.com/en/7.x/]
+
 # Other
 
 * [declaring the source encoding](encoding.md)
