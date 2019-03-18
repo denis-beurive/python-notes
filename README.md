@@ -28,7 +28,9 @@ DocStrings:
 
 * [operators](operators.md)
 * [documentation](documentation.md)
+* [inheritance](inheritance.md)
 * [functions / decorators](function.md)
+* [logging](logging.md)
 * [type checking](type_checks.md)
 * [unpack / splat](unpack.md)
 * [debug](debug.md)
@@ -52,6 +54,7 @@ DocStrings:
 
 * [cli parsing](cli-parsing.md)
 * [serialization](serialization.md)
+* [logging](logging.md)
 
 **Good packages**:
 
