@@ -56,6 +56,7 @@ DocStrings:
 * [cli parsing](cli-parsing.md)
 * [serialization](serialization.md)
 * [logging](logging.md)
+* [url](url.md)
 
 **Good packages**:
 
