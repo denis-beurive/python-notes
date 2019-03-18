@@ -45,6 +45,7 @@ DocStrings:
 * [comprehensions](comprehensions.md)
 * [generator expression](generator_expression.md)
 * [named tuple](namedtuple.md)
+* [object](object.md)
 
 # Design patterns
 
