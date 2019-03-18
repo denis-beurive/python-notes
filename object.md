@@ -74,4 +74,10 @@ Result:
      - pubA1 => 1
      - pubA2 => 2
 
+## Handy functions
+
+    def dump_attrs(o: object):
+        for name in dir(o):
+            if re.match('^__', name) is None:
+                print(f'- {name}: {o.__getattribute__(name)}')
 
