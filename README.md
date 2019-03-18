@@ -57,6 +57,7 @@ DocStrings:
 * [serialization](serialization.md)
 * [logging](logging.md)
 * [url](url.md)
+* [base64](base64.md)
 
 **Good packages**:
 
