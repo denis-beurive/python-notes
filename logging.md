@@ -32,3 +32,7 @@ This example above writes messages in a file with the following format:
 
 > This is good enough for simple uses. However, it may not be suitable for a production environment.
 
+## Custom formatter
+
+[This example](code/logging_formatter.py) shows how to build a custom formatter.
+
