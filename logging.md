@@ -67,6 +67,28 @@ Each _handler_ has its own configuration in terms of:
 
 [This example](code/logging_levels.py) illustrates the use of handlers.
 
+If you run this example, you will get two LOG files:
+
+* `/tmp/std.log`
+* `/tmp/secure.log`
+
+**`/tmp/std.log`**
+
+    20190319-085745 log DEBUG low priority message 1
+    20190319-085745 log INFO low priority message 2
+    20190319-085745 log WARNING high priority message 1
+    20190319-085745 log WARNING URGENT high priority message 1
+    20190319-085745 log ERROR high priority message 2
+    20190319-085745 log ERROR URGENT high priority message 2
+    20190319-085745 log CRITICAL high priority message 3
+    20190319-085745 log CRITICAL URGENT high priority message 3
+
+**`/tmp/secure.log`**
+
+    20190319-085745 log WARNING SECURE high priority message 1
+    20190319-085745 log ERROR SECURE high priority message 2
+    20190319-085745 log CRITICAL SECURE high priority message 3
+
 ## Good links
 
 * [Logging in Python](https://realpython.com/python-logging/)
