@@ -11,8 +11,8 @@
 
 import logging
 import os
-import re
-import base64
+import uuid
+from urllib.parse import quote, unquote
 
 PATH_FILE_LOG = os.path.join('/tmp', 'basic.log')
 SESSION = "aqszed"
@@ -20,6 +20,8 @@ SESSION = "aqszed"
 # See https://docs.python.org/3.6/library/logging.html#formatter-objects
 
 class MyFormatter(logging.Formatter):
+
+    uid_prefix = 0
 
     # ------------------------------------------------------------
     # Overridden methods.
@@ -42,8 +44,9 @@ class MyFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         state = 'R'
         if -1 != record.msg.find("\n"):
-            state = 'L'
-            record.msg = __class__._encode_string(record.msg)
+            ui = __class__._get_message_id()
+            state = f'L-{ui}'
+            record.msg = __class__._encode_string(record.msg) + "\n" + __class__._indent_multiline_string(record.msg, ui)
         record.__setattr__('session', self.__session)
         record.__setattr__('linearized', state)
         return super().format(record) # The line that will be appended to the LOG file.
@@ -57,16 +60,22 @@ class MyFormatter(logging.Formatter):
 
     @staticmethod
     def _encode_string(s: str) -> str:
-        m: bytes = base64.encodebytes(bytes(bytearray([ord(c) for c in s])))
-        s = m.decode()
-        s = re.sub('\n$', '', s)
-        return s
+        return quote(s)
 
     @staticmethod
     def _decode_string(s: str) -> str:
-        s = s + "\n"
-        m: bytes = base64.decodebytes(bytes(bytearray([ord(c) for c in s])))
-        return m.decode()
+        return unquote(s)
+
+    @staticmethod
+    def _indent_multiline_string(s: str, message_id: str) -> str:
+        return "\n".join(map(lambda x: f"\t# {message_id} # {x}", s.split("\n")))
+
+    @staticmethod
+    def _get_message_id() -> str:
+        uid: str = str(__class__.uid_prefix) + uuid.uuid1().hex[0:5]
+        __class__.uid_prefix += 1
+        return uid
+
 
 # Instantiate the formatter.
 #
@@ -94,7 +103,19 @@ logger.setLevel(logging.DEBUG)
 
 logger.debug('This is an DEBUG message')
 logger.info('This is an INFO message')
-logger.info('This is a multiline INFO message\ndata=10')
 logger.warning('This is a WARNING message')
 logger.error('This is an ERROR message')
 logger.critical('This is a CRITICAL message')
+
+message = """\
+bash-3.2$ python test2.py
+some text in single line
+As opposed to
+some text
+written as
+heredoc
+and then another single line\
+"""
+
+logger.info(message)
+
