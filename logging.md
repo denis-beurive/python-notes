@@ -53,5 +53,6 @@ This example above writes messages in a file with the following format:
             # 09ef1a # heredoc
             # 09ef1a # and then another single line
 
+## Good links
 
-
+* [Logging in Python](https://realpython.com/python-logging/)
