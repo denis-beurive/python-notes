@@ -53,6 +53,20 @@ This example above writes messages in a file with the following format:
             # 09ef1a # heredoc
             # 09ef1a # and then another single line
 
+## Using several handlers
+
+A logger handles messages through _handlers_.
+
+Each _handler_ has its own configuration in terms of:
+
+* the severity level (DEBUG, INFO...).
+* output (file, emails, HTTP requests...).
+* formatting.
+
+> Please note, however, that, even though each handler is configured with a severity level, the logger is also configured with a severity level. **And the logger configuration, in terms of severity level, overwrites the configuration of all its handlers**. That is, if the severity level assigned to the logger is `WARNING` (_which is the default value, by the way_), then no messages with the lower severity level will be processed, even if a handler is configured to handle messages with a lower severity level (`DEBUG` or `INFO`).
+
+[This example](code/logging_levels.py) illustrates the use of handlers.
+
 ## Good links
 
 * [Logging in Python](https://realpython.com/python-logging/)
