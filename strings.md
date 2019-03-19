@@ -1,5 +1,23 @@
 # Strings
 
+## HereDoc
+
+Very simple:
+
+    message = """
+    This is
+    a multiline
+    string
+    """
+
+If you want to get rid of the first and last return carriage:
+
+    message = """\
+    This is
+    a multiline
+    string\
+    """
+
 ## Templates
 
     street = '1 av de Paris'
