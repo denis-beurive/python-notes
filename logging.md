@@ -89,6 +89,93 @@ If you run this example, you will get two LOG files:
     20190319-085745 log ERROR SECURE high priority message 2
     20190319-085745 log CRITICAL SECURE high priority message 3
 
+## Defining a hierarchy of loggers
+
+Loggers can be organised in a hierarchical way, similar to the way UI components are organised in a user interface. 
+
+In [this example](code/logging-tree.py), we build a 3 levels hierarchy:
+
+![Logging Tree](images/logging-tree-1.png)
+
+By default, all messages emitted by the logger "`A.B.C`" will bubble up to the top level "`A`".
+
+However, this behaviour can be altered by setting the logger property `propagate` to the value `False`.
+
+Running this script will produce this output:
+
+All loggers propagate the emitted messages:
+
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG TEST 1
+    STD A.B-> 20190320-101452 A.B.C DEBUG TEST 1
+    STD A-> 20190320-101452 A.B.C DEBUG TEST 1
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG debug[abc]
+    STD A.B-> 20190320-101452 A.B.C DEBUG debug[abc]
+    STD A-> 20190320-101452 A.B.C DEBUG debug[abc]
+    STD A.B.C-> 20190320-101452 A.B.C INFO info[abc]
+    STD A.B-> 20190320-101452 A.B.C INFO info[abc]
+    STD A-> 20190320-101452 A.B.C INFO info[abc]
+    STD A.B.C-> 20190320-101452 A.B.C WARNING warning[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C WARNING warning[abc]
+    STD A.B-> 20190320-101452 A.B.C WARNING warning[abc]
+    SEC A.B-> 20190320-101452 A.B.C WARNING warning[abc]
+    STD A-> 20190320-101452 A.B.C WARNING warning[abc]
+    SEC A-> 20190320-101452 A.B.C WARNING warning[abc]
+    STD A.B.C-> 20190320-101452 A.B.C ERROR error[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C ERROR error[abc]
+    STD A.B-> 20190320-101452 A.B.C ERROR error[abc]
+    SEC A.B-> 20190320-101452 A.B.C ERROR error[abc]
+    STD A-> 20190320-101452 A.B.C ERROR error[abc]
+    SEC A-> 20190320-101452 A.B.C ERROR error[abc]
+    STD A.B.C-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    STD A.B-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    SEC A.B-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    STD A-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    SEC A-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG END TEST 1
+    STD A.B-> 20190320-101452 A.B.C DEBUG END TEST 1
+    STD A-> 20190320-101452 A.B.C DEBUG END TEST 1
+
+Logger "`A.B.C`" does not propagate the emitted messages:
+
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG TEST 2
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG debug[abc]
+    STD A.B.C-> 20190320-101452 A.B.C INFO info[abc]
+    STD A.B.C-> 20190320-101452 A.B.C WARNING warning[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C WARNING warning[abc]
+    STD A.B.C-> 20190320-101452 A.B.C ERROR error[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C ERROR error[abc]
+    STD A.B.C-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG END TEST 2
+
+Logger "`A.B`" does not propagate the emitted messages:
+
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG TEST 3
+    STD A.B-> 20190320-101452 A.B.C DEBUG TEST 3
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG debug[abc]
+    STD A.B-> 20190320-101452 A.B.C DEBUG debug[abc]
+    STD A.B.C-> 20190320-101452 A.B.C INFO info[abc]
+    STD A.B-> 20190320-101452 A.B.C INFO info[abc]
+    STD A.B.C-> 20190320-101452 A.B.C WARNING warning[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C WARNING warning[abc]
+    STD A.B-> 20190320-101452 A.B.C WARNING warning[abc]
+    SEC A.B-> 20190320-101452 A.B.C WARNING warning[abc]
+    STD A.B.C-> 20190320-101452 A.B.C ERROR error[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C ERROR error[abc]
+    STD A.B-> 20190320-101452 A.B.C ERROR error[abc]
+    SEC A.B-> 20190320-101452 A.B.C ERROR error[abc]
+    STD A.B.C-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    SEC A.B.C-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    STD A.B-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    SEC A.B-> 20190320-101452 A.B.C CRITICAL critical[abc]
+    STD A.B.C-> 20190320-101452 A.B.C DEBUG END TEST 3
+    STD A.B-> 20190320-101452 A.B.C DEBUG END TEST 3
+
+## Configuration
+
+See [logging.config](https://docs.python.org/3.6/library/logging.config.html#module-logging.config)
+
 ## Good links
 
 * [Logging in Python](https://realpython.com/python-logging/)
