@@ -93,7 +93,7 @@ If you run this example, you will get two LOG files:
 
 Loggers can be organised in a hierarchical way, similar to the way UI components are organised in a user interface. 
 
-In [this example](code/logging-tree.py), we build a 3 levels hierarchy:
+In [this example](code/logging_tree.py), we build a 3 levels hierarchy:
 
 ![Logging Tree](images/logging-tree-1.png)
 
