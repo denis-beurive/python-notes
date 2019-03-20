@@ -176,6 +176,29 @@ Logger "`A.B`" does not propagate the emitted messages:
 
 See [logging.config](https://docs.python.org/3.6/library/logging.config.html#module-logging.config)
 
+All the configuration that is done through Python code can be done using a structured data. This data can be a dictionary, a YAML document or a specially formatted document (as described [here](https://docs.python.org/3.6/library/logging.config.html#configuration-file-format)).
+
+[This example](code/logging_config.py) illustrates the use of a dictionary to configure the logging service.
+
+Running this script will produce this output:
+
+File `/tmp/standard.log`:
+
+    20190320-123411 high.low DEBUG LOW debug
+    20190320-123411 high.low INFO LOW info
+    20190320-123411 high.low WARNING LOW warning
+    20190320-123411 high.low ERROR LOW error
+    20190320-123411 high.low CRITICAL LOW critical
+
+File `/tmp/urgent.log`:
+
+    URGENT 20190320-123411 high.low WARNING LOW warning
+    URGENT 20190320-123411 high.low ERROR LOW error
+    URGENT 20190320-123411 high.low CRITICAL LOW critical
+    URGENT 20190320-123411 high WARNING HIGH warning
+    URGENT 20190320-123411 high ERROR HIGH error
+    URGENT 20190320-123411 high CRITICAL HIGH critical
+
 ## Good links
 
 * [Logging in Python](https://realpython.com/python-logging/)
