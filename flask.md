@@ -163,7 +163,7 @@ If all goes well, then you should get:
 Make sure that the Apache module is installed:
 
     # ls -l /usr/lib/apache2/modules/mod_wsgi.so
--rpath-rw-r--r-- 1 root root 1104784 Mar 25 14:48 /usr/lib/apache2/modules/mod_wsgi.so
+    -rw-r--r-- 1 root root 1104784 Mar 25 14:48 /usr/lib/apache2/modules/mod_wsgi.so
 
 Restart Apache:
 
