@@ -200,7 +200,8 @@ Let's say that:
 
 * `thermo.py` is the application source code.
 * `thermo.wsgi` is the application loader.
-* these two files are located into the same directory "`www`".
+
+These two files are located into the same directory "`www`".
 
     www
     ├── thermo.py
