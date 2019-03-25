@@ -58,6 +58,7 @@ DocStrings:
 * [logging](logging.md)
 * [url](url.md)
 * [base64](base64.md)
+* [flask](flask.md)
 
 **Good packages**:
 
