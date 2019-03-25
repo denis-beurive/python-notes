@@ -101,7 +101,7 @@ If Python has not been compiled with the configuration option `--enable-shared`,
     make -j8
     sudo make altinstall
 
-> `make altinstall` should install the _development files_ (the the `Kakefile`).
+> `make altinstall` should install the _development files_ (see the `Makefile`).
 
 ##### Compilation
 
@@ -162,7 +162,7 @@ If all goes well, then you should get:
 
 Make sure that the Apache module is installed:
 
-    $ ls -l /usr/lib/apache2/modules/mod_wsgi.so
+    # ls -l /usr/lib/apache2/modules/mod_wsgi.so
 -rpath-rw-r--r-- 1 root root 1104784 Mar 25 14:48 /usr/lib/apache2/modules/mod_wsgi.so
 
 Restart Apache:
