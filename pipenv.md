@@ -44,13 +44,9 @@ To run the command below, you must be in the project directory tree (which conta
 
     pipenv --rm
 
-# Activate a virtual environment
+# Clear the pipenv caches
 
-To activate a virtual environment (bound to a project), go to the root directory of the project and run the command below:
-
-    pipenv shell
-
-Within this shell, all Python related commands will refer to the version of Python specified by the command `pipenv --python`.
+    pipenv --clear
 
 # Get the path to the directory that contains a "virtual environment / project" configuration
 
@@ -63,6 +59,46 @@ To run the command below, you must be in the project directory tree (which conta
     bin  include  lib
 
 As you can see, the directory contains all the "elements" that defines a Python environment.
+
+# Activate a virtual environment
+
+## From the shell
+
+To activate a virtual environment (bound to a project), go to the root directory of the project and run the command below:
+
+    pipenv shell
+
+Within this shell, all Python related commands will refer to the version of Python specified by the command `pipenv --python`.
+
+## From a Python script
+
+Typically the method is used within a WSGI application.
+
+First, find the file named "`activate_this.py`" (that contains the code that activates the virtual environment).
+
+From the project directory:
+
+    find $(pipenv --venv) -name "activate_this.py"
+
+Or:
+
+    ls "$(pipenv --venv)/bin/activate_this.py"
+
+For example:
+
+    $ find $(pipenv --venv) -name "activate_this.py"
+    /home/thermo/.local/share/virtualenvs/thermo_test-IVHwWUHZ/bin/activate_this.py
+
+    $ ls "$(pipenv --venv)/bin/activate_this.py"
+    /home/thermo/.local/share/virtualenvs/thermo_test-IVHwWUHZ/bin/activate_this.py
+
+Then, within the python script:
+
+    activator = '/home/thermo/.local/share/virtualenvs/thermo_test-IVHwWUHZ/bin/activate_this.py'
+    with open(activator) as f:
+        exec(f.read(), {'__file__': activator})
+
+> This code works for Python 3 only.
 
 # Get the path to the project associated with the current virtual environment
 
