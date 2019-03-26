@@ -1,10 +1,8 @@
 # Flask
 
-
-
 ## Setup Flask with Apache
 
-This section shows how to use Flask with an Apache server.
+This section shows how to use a Flask application with an Apache server.
 
 See [this documentation](http://flask.pocoo.org/docs/1.0/deploying/mod_wsgi/).
 
@@ -192,14 +190,24 @@ If Python cannot load a shared library, then make sure that the path to the dire
 
 > See [this link](http://blog.andrewbeacock.com/2007/10/how-to-add-shared-libraries-to-linuxs.html).
 
+## Create a Flask application
+
+See this example: [www.py](code/flask/www.py).
+
+Then you need to integrate the application to the WEB server. This means:
+
+* Create a WSGI loader that will handle the execution of the application.
+* Create a virtual host.
+* Test the configuration.
+
 ### Create a WSGI aplication loader
 
 Create a Python file that will be used to load the Flask application.
 
 Let's say that:
 
-* `www.py` is the application source code.
-* `www.wsgi` is the application loader.
+* `www.py` is the application source code. See [www.py](code/flask/www.py).
+* `www.wsgi` is the application loader. See [www.wsgi](code/flask/www.wsgi).
 
 These two files are located into the same directory "`www`".
 
@@ -237,7 +245,11 @@ Restart Aapche
 
     sudo service apache2 restart && echo "OK"
 
-Test the configuration. If an error occurs, then you can usually find out what's wrong by looking at the Apache LOG files:
+### Test the configuration
+
+Open a browser and enter the URL to your application.
+
+If an error occurs, then you can usually find out what's wrong by looking at the Apache LOG files:
 
     sudo tail -f /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log
 
