@@ -198,80 +198,28 @@ Create a Python file that will be used to load the Flask application.
 
 Let's say that:
 
-* `thermo.py` is the application source code.
-* `thermo.wsgi` is the application loader.
+* `www.py` is the application source code.
+* `www.wsgi` is the application loader.
 
 These two files are located into the same directory "`www`".
 
     www
-    ├── thermo.py
-    └── thermo.wsgi
+    ├── www.py
+    └── www.wsgi
 
-Then, the code of the application loader looks like:
+Then, the code of the application loader looks like [www.wsgi](code/flask/www.wsgi).
 
-    # This configuration file assumes that:
-    #
-    # [1] this file and the application source code ("thermo.py") are located within the same directory.
-    # [2] the Flask application is named "app" (in the application source code).
-    #     That is, it has been created this way: app = Flask(__name__)
-    #
-    # If you are using PyCharm, then you should add the path to the directory that contains the application source code to
-    # "PYTHONPATH".
+> **Note 1**: by convention, the file name end with the suffix "`.wsgi`" (ex: `www.wsgi`). However, this is only a convention and you can give this file any name you want.
 
-    import sys
-    import os
-
-    def set_python_search_path():
-        local_directory = os.path.dirname(os.path.abspath(__file__))
-        sys.path.insert(0, local_directory)
-
-    def activate_virtual_env():
-
-        # $ find ~/ -name "activate_this.py"
-        # /home/thermo/.local/share/virtualenvs/thermo_test-IVHwWUHZ/bin/activate_this.py
-
-        activator = '/home/thermo/.local/share/virtualenvs/thermo_test-IVHwWUHZ/bin/activate_this.py'
-        with open(activator) as f:
-            exec(f.read(), {'__file__': activator})
-
-    def debug():
-        local_directory = os.path.dirname(os.path.abspath(__file__))
-        log_path = os.path.join(local_directory, 'wsgi.trace')
-        with open(log_path, 'w') as fd:
-            fd.write("Python version = %s\n" % sys.version_info[0])
-            fd.write("Python search paths = %s\n" % ', '.join(sys.path))
-
-    activate_virtual_env()
-    set_python_search_path()
-    debug()
-
-    from thermo import app as application
-
-> **Note 1**: by convention, the file name end with the suffix "`.wsgi`" (ex: `thermo.wsgi`). However, this is only a convention and you could give this file any name you want.
-
-> **Note 2**: as you can see, the file that contains the source code of the (Flask) application (`thermo.py`) is considered by the WSGI loader to be a Python module - `thermo` (within the package `www`). Thus you must configure the Python module loader so that it finds the module to load (`thermo`).
+> **Note 2**: as you can see, the file that contains the source code of the (Flask) application (`www.py`) is considered by the WSGI loader to be a Python module - `www` (within the package `www`). Thus you must configure the Python module loader so that it finds the module to load (`www`).
 
 ### Create a virtual host
 
-First create the virtual host configuration file `/etc/apache2/sites-available/thermo.conf`:
-
-    <VirtualHost *:80>
-        ServerName example.ddns.net
-        ServerAlias www.example.ddns.net
-
-        WSGIDaemonProcess thermo user=thermo group=thermo threads=5
-        WSGIScriptAlias / /home/thermo/projects/thermo_test/www/thermo.wsgi
-
-        <Directory /home/thermo/projects/thermo_test/www>
-            WSGIProcessGroup thermo
-            WSGIApplicationGroup %{GLOBAL}
-            Require all granted
-        </Directory>
-    </VirtualHost>
+First create the virtual host configuration file `/etc/apache2/sites-available/www.conf`: see [www.conf](code/flask/www.conf).
 
 Please note:
 
-* **The path to the WSGI loader**: `/home/thermo/projects/thermo_test/www/thermo.wsgi`
+* **The path to the WSGI loader**: `/home/thermo/projects/thermo_test/www/www.wsgi`
 * **The user that will execute the application**: `user=thermo group=thermo`
 
 Then:
@@ -285,9 +233,9 @@ Check the Apache configuration:
     sudo /usr/sbin/apachectl configtest
     sudo /usr/sbin/apachectl -S
 
-Reload the configuration:
+Restart Aapche
 
-    sudo service apache2 reload && echo "OK"
+    sudo service apache2 restart && echo "OK"
 
 Test the configuration. If an error occurs, then you can usually find out what's wrong by looking at the Apache LOG files:
 
@@ -327,7 +275,7 @@ Error message:
 
 This means that the virtual environment is not activated. You need to find the file "`activate_this.py`" that activates the environment:
 
-    $ find ~/ -name "activate_this.py"
+    $ echo "$(pipenv --venv)/bin/activate_this.py"
     /home/thermo/.local/share/virtualenvs/thermo_test-IVHwWUHZ/bin/activate_this.py
 
 Then you need to load this file from the WSGI application loader:
