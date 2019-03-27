@@ -17,8 +17,14 @@
 
 from flask import Flask, request
 import pickle
+import datetime
+from uuid import uuid4
+import hashlib
 
 app = Flask(__name__)
+
+def get_uid() -> str:
+    return hashlib.sha256(uuid4().bytes).hexdigest()[0:6]
 
 def request_to_str() -> str:
     text = [f"Method: {request.method}\n", "Header:\n"]
@@ -34,9 +40,12 @@ def request_to_str() -> str:
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    with open('request.info', 'w') as fd:
+    now = datetime.datetime.now()
+    timestamp = now.strftime('%Y%m%d%H%M%S')
+    uid = get_uid()
+    with open(f'request.{timestamp}-{uid}.info', 'w') as fd:
         fd.write(request_to_str())
-    with open('request.bin', 'wb') as fd:
+    with open(f'request.{timestamp}-{uid}.bin', 'wb') as fd:
         pickle.dump(request, fd)
     return 'Hello, World!'
 
