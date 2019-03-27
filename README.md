@@ -59,6 +59,7 @@ DocStrings:
 * [url](url.md)
 * [base64](base64.md)
 * [flask](flask.md)
+* [uuid - get a unique ID](uniqid.md)
 
 **Good packages**:
 
