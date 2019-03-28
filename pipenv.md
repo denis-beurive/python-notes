@@ -82,6 +82,12 @@ Example:
 
     pipenv install pytest
 
+### Update a package
+
+    pipenv update requests
+
+Please note that prior to and after running the command, you should inspect the dependencies graph: `pipenv graph`.
+
 ### Uninstall a package
 
     pipenv uninstall crypto
