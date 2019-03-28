@@ -211,14 +211,14 @@ If you think that it takes too much time, then you can:
 
 Print the content of the file "`Pipfile`". Make sure that the list of packages does not contain a package that does not exist. For example:
 
-  [packages]
-  google-api-python-client = "*"
-  google-auth-httplib2 = "*"
-  google-auth-oauthlib = "*"
-  flask = "*"
-  google-auth = "*"
-  requetes = "*"
-  requests = "*"
+    [packages]
+    google-api-python-client = "*"
+    google-auth-httplib2 = "*"
+    google-auth-oauthlib = "*"
+    flask = "*"
+    google-auth = "*"
+    requetes = "*"
+    requests = "*"
 
 The package "`requetes`" does not exist.
 
