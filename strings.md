@@ -67,6 +67,27 @@ Splitting based on a regular expression:
     text = 'x' * 3
     print(text) # => xxx
 
+## Finding the maximum length of a list of strings
+
+Example 1:
+
+    m: int = max(map(lambda x: len(x), ['1', '22', '333']))
+    print(f"Max length: {m}\n")
+
+Example 2:
+
+    cities = {
+        "Paris": "France",
+        "Madrid": "Spain",
+        "New-York": "U.S"
+    }
+
+    m: int = max(map(lambda x: len(x), cities.keys()))
+    print(f"Max length: {m}\n")
+
+    for name, value in cities.items():
+        print('* {:<{width}}: {}'.format(name, value, width=m))
+
 ## Formatting
 
 Very good link: [PyFormat](https://pyformat.info/)
@@ -140,8 +161,5 @@ This can be very handy:
 Result:
 
     [----x----]
-
-
-
 
 
