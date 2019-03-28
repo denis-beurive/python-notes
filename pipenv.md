@@ -226,7 +226,7 @@ You may have asked `pipenv` to install an unknown package (for example: "`requet
 
 If you requested the installation of an unknown package, then remove it from the list of requested packages. Then clear the lock file (see step 2).
 
-## Step2: clear the lock file
+## Step 2: clear the lock file
 
     pipenv --clear lock
 
