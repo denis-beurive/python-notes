@@ -20,6 +20,8 @@ If you want to get rid of the first and last return carriage:
 
 ## Templates
 
+    from string import Template
+    
     street = '1 av de Paris'
     zip_code = 92110
     city = 'Clichy'
