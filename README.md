@@ -46,6 +46,7 @@ DocStrings:
 * [generator expression](generator_expression.md)
 * [named tuple](namedtuple.md)
 * [object](object.md)
+* [sorting](sorting.md)
 
 # Design patterns
 
