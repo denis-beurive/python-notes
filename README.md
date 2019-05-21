@@ -47,6 +47,7 @@ DocStrings:
 * [named tuple](namedtuple.md)
 * [object](object.md)
 * [sorting](sorting.md)
+* [module](module.md)
 
 # Design patterns
 
