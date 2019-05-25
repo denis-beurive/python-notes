@@ -67,86 +67,29 @@ Multiple lines & Case insensitive:
 
 ## Negative look-ahead
 
-Code [here](code/re_negative_look_ahead.py)
+See full example [here](code/re_negative_look_ahead.py)
 
-    import re
-    from typing import Pattern, Match, Optional, Union, List
-    from pprint import pformat
+Look for "a" not followed by "b":
+    
+    a(?!b)
 
+Please note:
 
-    def dump_match(tag: str, m: Union[Optional[Match], List[str]]):
-        if m is None:
-            print("{} no match\n".format(tag))
-            return
+* This expression matches **one and only one** character: an "a".
+* An "a" that is not followed by any character is, even more so, not followed by a "b".
 
-        if isinstance(m, Match):
-            print('{} {:<4}: {}'.format(tag, 0, pformat(m.group(0))))
-            for i in range(0, len(m.groups())):
-                print('{} {:<4}: {}'.format(tag, i+1, pformat(m.group(i+1))))
-        else:
-            if len(m) == 0:
-                print("{} no match\n".format(tag))
-                return
-            for i in range(0, len(m)):
-                print('{} {:<4}: {}'.format(tag, i, pformat(m[i])))
-        print('')
+Thus:
 
-
-    # This is negative look ahead.
-
-    # The only text that matches is "a".
-    #
-    # Why ?
-    #
-    # Because the text that matches the expression must *start* with the character "a" (that, incidentally, is not
-    # followed by a "b"). Yet if "a" is followed by a character (other than "b"), then, clearly, the text is, at least, 2
-    # characters long!
-    #
-    # However, "a" does not necessarily need to be followed by a character. If "a" is not followed by any character, then is
-    # it not followed by "b", right ? Thus, the only text that matches the expression is "a".
-    p: Pattern = re.compile('^a(?!b)$')
-    m: Optional[Match] = p.match('a')
-    dump_match('[1]', m)
-
-    # However, "search" and "replace" may found matches
-    p: Pattern = re.compile('a(?!b)')
-    m: Optional[Match] = p.search('-aaab')
-    dump_match('[2]', m)  # Found 1 match (the first "a")
-    r: List[str] = p.findall('aaab')
-    dump_match('[3]', r)  # Found 2 matches (the 2 first "a")
-
-    # This may match, since the text that matches must be 2 characters long.
-    p: Pattern = re.compile('^a(?!b).$')
-    m: Optional[Match] = p.match('ac')
-    dump_match('[4]', m)  # Match
-    p: Pattern = re.compile('^a(?!b)(.+)$')
-    m: Optional[Match] = p.match('acxx')
-    dump_match('[5]', m)  # Match
-
-    # This may also match.
-    p: Pattern = re.compile('^a(?!xx)..$')
-    m: Optional[Match] = p.match('a--')
-    dump_match('[6]', m)  # Match
-    m: Optional[Match] = p.match('ax-')
-    dump_match('[7]', m)  # Match
-
-Result:
-
-    [1] 0   : 'a'
-
-    [2] 0   : 'a'
-
-    [3] 0   : 'a'
-    [3] 1   : 'a'
-
-    [4] 0   : 'ac'
-
-    [5] 0   : 'acxx'
-    [5] 1   : 'cxx'
-
-    [6] 0   : 'a--'
-
-    [7] 0   : 'ax-'
+    * `match('a(?!b)', 'a')` matches (one "a" not followed by a "b").
+    * `match('^a(?!b)$', 'a')` matches (only one character).
+       This is aquivalent to `^a$`.
+    * `match('a(?!b)', 'ac')` matches (one "a").
+    * `match('a(?!b)$', 'ac')` fails ("a" is not the last character).
+      This is aquivalent to `a$`.
+    * `match('a(?!b).', 'ac')` matches 2 characters.
+    * `match('^a(?!b).$', 'ac')` matches 2 characters.
+    
+> `a(?!b).` is not equivalent to `a(?!b)[^b]`. `[^b]` matches `\n` while `.` (by default) does not.
 
 ## Positive look-ahead
 
@@ -171,120 +114,25 @@ The "text" that follows can be a regular expression:
 
 Code [here](code/re_negative_look_behind.py)
 
-    import re
-    from typing import Pattern, Match, Optional, Union, List
-    from pprint import pformat
+Look for "a" not preceded by "b":
+    
+    (?<!a)b
 
+Please note:
 
-    def dump_match(tag: str, m: Union[Optional[Match], List[str]]):
-        if m is None:
-            print("{} no match\n".format(tag))
-            return
+* This expression matches **one and only one** character: a "b".
+* A "b" that is not preceded by any character is, even more so, not preceded by a "a".
 
-        if isinstance(m, Match):
-            print('{} {:<4}: {}'.format(tag, 0, pformat(m.group(0))))
-            for i in range(0, len(m.groups())):
-                print('{} {:<4}: {}'.format(tag, i+1, pformat(m.group(i+1))))
-        else:
-            if len(m) == 0:
-                print("{} no match\n".format(tag))
-                return
-            for i in range(0, len(m)):
-                print('{} {:<4}: {}'.format(tag, i, pformat(m[i])))
-        print('')
+Thus:
 
+* `match('(?<!a)b', 'cb')` fails (we are looking for a "b" at the begining of the text).
+* `search('(?<!a)b', 'cb')` finds a result (the "b").
+* `match('^(?<!a)b', 'cb')` fails (we are looking for a "b" at the begining of the text).
+  The is equivalent to '^b'.
+* `match('^(?<!a)b', 'b')` matches.
+* `match('^.(?<!a)b', 'cb')` matches. The text must start with a character other than "a".
 
-    # This is negative look behind.
-
-    # This may match:
-    p: Pattern = re.compile('^[^a](?<!a)b$')
-    m: Optional[Match] = p.match('cb')
-    dump_match('[1]', m)
-
-    # This will match only one text: "b".
-    #
-    # Why ?
-    #
-    # Because the text that matches the expression must *start* with the character "b" (that, incidentally, is not
-    # preceded by an "a"). Yet if "b" is preceded by a character (other than "a"), then, clearly, the text is, at least, 2
-    # characters long!
-    #
-    # However, "b" does not need to be preceded by a character to match the expression: if "b" is not preceded by a
-    # character, then it is not preceded by "a", right ? Thus, the only text that matches the expression is "b".
-
-    p: Pattern = re.compile('^(?<!a)b$')
-    m: Optional[Match] = p.match('cb')  # Won't match
-    dump_match('[2]', m)
-    m: Optional[Match] = p.match('b')  # Match
-    dump_match('[3]', m)
-
-    # However, "search" and "replace" may found matches
-    p: Pattern = re.compile('(?<!a)b')
-    r: List[str] = p.findall('cb')
-    dump_match('[4]', r)
-    p: Pattern = re.compile('(?<!a)b')
-    m: Optional[Match] = p.search('cb')
-    dump_match('[5]', r)
-
-    # This may match:
-    p: Pattern = re.compile('^(.)(?<!a)b$')
-    m: Optional[Match] = p.match('cb')
-    dump_match('[6]', m)
-
-    # This may match:
-    p: Pattern = re.compile('^([^\\d])(?<!\\d)b$')
-    m: Optional[Match] = p.match('cb')
-    dump_match('[7]', m)
-
-    # This may match:
-    p: Pattern = re.compile('^([^\\d])(?<!\\d)b$')
-    m: Optional[Match] = p.match('cb')
-    dump_match('[8]', m)
-
-    # This may match:
-    p: Pattern = re.compile('^([^\\d])(?<!\\d)b$')
-    m: Optional[Match] = p.match('cb')
-    dump_match('[9]', m)
-
-    # This may match:
-    p: Pattern = re.compile('^(.+)(?<!en)b$')
-    m: Optional[Match] = p.match('cb')
-    dump_match('[10]', m)
-
-    # This may match:
-    p: Pattern = re.compile('^(.+)(?<!en)b$')
-    m: Optional[Match] = p.match('aaaaab')
-    dump_match('[11]', m)
-
-Result:
-
-    [1] 0   : 'cb'
-
-    [2] no match
-
-    [3] 0   : 'b'
-
-    [4] 0   : 'b'
-
-    [5] 0   : 'b'
-
-    [6] 0   : 'cb'
-    [6] 1   : 'c'
-
-    [7] 0   : 'cb'
-    [7] 1   : 'c'
-
-    [8] 0   : 'cb'
-    [8] 1   : 'c'
-
-    [9] 0   : 'cb'
-    [9] 1   : 'c'
-
-    [10] 0   : 'cb'
-    [10] 1   : 'c'
-
-    [11] 0   : 'aaaaab'
-    [11] 1   : 'aaaaa'
+> `.(?<!a)b` is not equivalent to `[^a](?<!a)b`. `[^a]` matches `\n` while `.` (by default) does not.
 
 # Positive look-behind
 

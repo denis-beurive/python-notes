@@ -23,38 +23,53 @@ def dump_match(tag: str, m: Union[Optional[Match], List[str]]):
 
 # This is negative look ahead.
 
-# The only text that matches is "a".
+# a(?!b): "a" not followed by "b".
 #
-# Why ?
+# Notes:
 #
-# Because the text that matches the expression must *start* with the character "a" (that, incidentally, is not
-# followed by a "b"). Yet if "a" is followed by a character (other than "b"), then, clearly, the text is, at least, 2
-# characters long!
-#
-# However, "a" does not necessarily need to be followed by a character. If "a" is not followed by any character, then is
-# it not followed by "b", right ? Thus, the only text that matches the expression is "a".
+# * This expression matches **one and only one** character: an "a".
+# * An "a" that is not followed by any character is, even more so, not followed by a "b".
+
+# One "a" not followed by a "b".
+p: Pattern = re.compile('a(?!b)')
+m: Optional[Match] = p.match('a')
+dump_match('[1]', m)  # Match
+
+# One "a" not followed by a "b" <=> '^a$'.
 p: Pattern = re.compile('^a(?!b)$')
 m: Optional[Match] = p.match('a')
-dump_match('[1]', m)
+dump_match('[2]', m)  # Match
 
-# However, "search" and "replace" may found matches
+# Matches the "a".
 p: Pattern = re.compile('a(?!b)')
-m: Optional[Match] = p.search('-aaab')
-dump_match('[2]', m)  # Found 1 match (the first "a")
-r: List[str] = p.findall('aaab')
-dump_match('[3]', r)  # Found 2 matches (the 2 first "a")
-
-# This may match, since the text that matches must be 2 characters long.
-p: Pattern = re.compile('^a(?!b).$')
 m: Optional[Match] = p.match('ac')
-dump_match('[4]', m)  # Match
-p: Pattern = re.compile('^a(?!b)(.+)$')
-m: Optional[Match] = p.match('acxx')
+dump_match('[3]', m)  # Match
+
+# "a" is not the last character <=> 'a$'
+p: Pattern = re.compile('a(?!b)$')
+m: Optional[Match] = p.match('ac')
+dump_match('[4]', m)  # Fail
+
+# Matches 2 characters.
+p: Pattern = re.compile('a(?!b).')
+m: Optional[Match] = p.match('ac')
 dump_match('[5]', m)  # Match
 
-# This may also match.
-p: Pattern = re.compile('^a(?!xx)..$')
-m: Optional[Match] = p.match('a--')
+# Matches 2 characters.
+p: Pattern = re.compile('^a(?!b).$')
+m: Optional[Match] = p.match('ac')
 dump_match('[6]', m)  # Match
-m: Optional[Match] = p.match('ax-')
-dump_match('[7]', m)  # Match
+
+# Result:
+#
+#     [1] 0   : 'a'
+#
+#     [2] 0   : 'a'
+#
+#     [3] 0   : 'a'
+#
+#     [4] no match
+#
+#     [5] 0   : 'ac'
+#
+#     [6] 0   : 'ac'
