@@ -65,11 +65,26 @@ Multiple lines & Case insensitive:
     print(m.group(1))  # => a@b
     print(m.group(2))  # => c@d
 
+
+# Negative/Positive look ahead/behind
+
+The basics:
+
+* look-ahead  => followed by...
+* look-behind => preceded by...
+
+Then:
+
+* Positive look-ahead  => followed by...
+* Positive look-behind => preceded by...
+* Negative look-ahead  => not followed by...
+* Negative look-behind => not preceded by...
+
 ## Negative look-ahead
 
 See full example [here](code/re_negative_look_ahead.py)
 
-Look for "a" not followed by "b":
+Look for "a" _not_ followed by "b":
     
     a(?!b)
 
@@ -91,30 +106,29 @@ Thus:
     
 > `a(?!b).` is not equivalent to `a(?!b)[^b]`. `[^b]` matches `\n` while `.` (by default) does not.
 
-## Positive look-ahead
+## Positive look-ahea
 
-"q" followed by "u".
+See full example [here](code/re_positive_look_ahead.py)
 
-    p: Pattern = re.compile('q(?:u)')
-    m: Optional[Match] = p.match("qu")
-    print(m.group(0))  # => qu
+Look for "a" followed by "b":
 
-As you can see, the character "u" is included into the global match.
+    a(?:b)
 
-The "text" that follows can be a regular expression:
+Please note:
 
-    p: Pattern = re.compile('q(?:\\w@\\w)')
-    m: Optional[Match] = p.match("qa@b")
-    print(m.group(0))  # => qa@b
+* This expression matches **two and exactly two** characters: "ab".
+* An "a" that is not followed by any character is, even more so, not followed by a "b".
 
-    m: Optional[Match] = p.match("qab")
-    pprint(m)  # => None
+Thus:
 
-# Negative look-behind
+* `match('a(?:b)', 'a')` fails (We are looking for 2 characters).
+* `match('a(?:b)', 'abc')` matches "ab".
+
+## Negative look-behind
 
 Code [here](code/re_negative_look_behind.py)
 
-Look for "a" not preceded by "b":
+Look for "a" _not_ preceded by "b":
     
     (?<!a)b
 
@@ -134,48 +148,43 @@ Thus:
 
 > `.(?<!a)b` is not equivalent to `[^a](?<!a)b`. `[^a]` matches `\n` while `.` (by default) does not.
 
-# Positive look-behind
+## Positive look-behind
 
-"b" preceded by "a"
+Code [here](code/re_positive_look_behind.py)
 
-    p: Pattern = re.compile('(?<=a)b')
-    m: Optional[Match] = p.match('ab')
-    pprint(m)  # => None
+Look for "b" preceded by "a":
+    
+    (?<=a)b
 
-Yep! You read it. It is not an error ! The text "`ab`" does NOT match "`(?<=a)b`" ! What !!! How is it possible ???
+Please note:
 
-"`(?<=a)b`" matches for one and only one character: a "b" (that is preceded by a "a")
+* This expression matches **one and exactly one** character: "b".
+* An "b" that is not preceded by any character is, even more so, not preceded by a "a".
 
-To match "ab" you can use "`a(?<=a)b`" or "`.(?<=a)b`"
+Thus:
 
-    p: Pattern = re.compile('a(?<=a)b', re.VERBOSE)
-    m: Optional[Match] = p.match('ab')
-    print(m.group(0))  # => ab
+* `match('(?<=a)b', 'b')` Fails. "b" should not be the first character of the text.
+* `match('(?<=a)b', 'ab')` Fails. "b" is indeed preceded by "a".
+  However, this expression matches **one and exactly one** character: "b".
+  When used with "match", it implies that "b" should be the first character in the text...
+  which is impossible.
+* `search('(?<=a)b', 'ab')` Matches "ab". We look for _an "a" followed by a "b" preceded itself by an "a"._
 
-    p: Pattern = re.compile('.(?<=a)b', re.VERBOSE)
-    m: Optional[Match] = p.match('ab')
-    print(m.group(0))  # => ab
-
-    p: Pattern = re.compile('(.)(?<=a)b')
-    m: Optional[Match] = p.match('ab')
-    print(m.group(0))  # => ab
-    print(m.group(1))  # => a
-
-## Lazy
+# Lazy
 
     p: Pattern = re.compile('(a+?)')
     m: Optional[Match] = p.match('aaaa')
     print(m.group(0))  # => a
     print(m.group(1))  # => a
 
-## Named regex
+# Named groups
 
     p: Pattern = re.compile('(?P<m1>[a-z]+)(?P<m2>\\d+)')
     m: Optional[Match] = p.match('ab12')
     print(m.group('m1'))  # => ab
     print(m.group('m2'))  # => 12
 
-## Non capturant "()"
+# Non capturant "()"
 
     p: Pattern = re.compile('(?:a+)ab')
     m: Optional[Match] = p.match('aaaab')
@@ -275,7 +284,7 @@ We get it!
     m: Match = p.match(t)
     pprint(m.group(0))  # => 'BEGIN aaaa\n END'
 
-...
+We get it!
 
     p: Pattern = re.compile('BEGIN[\n\t ]+[^(?<=((?<=E)N))D]+[\n\t ]+END', re.MULTILINE)
     t = """BEGIN

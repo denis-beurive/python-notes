@@ -33,32 +33,32 @@ def dump_match(tag: str, m: Union[Optional[Match], List[str]]):
 # One "a" not followed by a "b".
 p: Pattern = re.compile('a(?!b)')
 m: Optional[Match] = p.match('a')
-dump_match('[1]', m)  # Match
+dump_match('[1]', m)  # Matches "a"
 
 # One "a" not followed by a "b" <=> '^a$'.
 p: Pattern = re.compile('^a(?!b)$')
 m: Optional[Match] = p.match('a')
-dump_match('[2]', m)  # Match
+dump_match('[2]', m)  # Matches "a"
 
 # Matches the "a".
 p: Pattern = re.compile('a(?!b)')
 m: Optional[Match] = p.match('ac')
-dump_match('[3]', m)  # Match
+dump_match('[3]', m)  # Matches "a"
 
 # "a" is not the last character <=> 'a$'
 p: Pattern = re.compile('a(?!b)$')
 m: Optional[Match] = p.match('ac')
-dump_match('[4]', m)  # Fail
+dump_match('[4]', m)  # Fails
 
 # Matches 2 characters.
 p: Pattern = re.compile('a(?!b).')
 m: Optional[Match] = p.match('ac')
-dump_match('[5]', m)  # Match
+dump_match('[5]', m)  # Matches "ac"
 
 # Matches 2 characters.
 p: Pattern = re.compile('^a(?!b).$')
 m: Optional[Match] = p.match('ac')
-dump_match('[6]', m)  # Match
+dump_match('[6]', m)  # Matches "ac"
 
 # Result:
 #
