@@ -168,6 +168,7 @@ Thus:
   However, this expression matches **one and exactly one** character: "b".
   When used with "match", it implies that "b" should be the first character in the text...
   which is impossible.
+* `search('(?<=a)b', 'ab')` Matches "b". Indeed "search()" does not imply that "b" must be the first character of the text.  
 * `search('a(?<=a)b', 'ab')` Matches "ab". We look for _an "a" followed by a "b" preceded itself by an "a"._
 
 # Lazy
