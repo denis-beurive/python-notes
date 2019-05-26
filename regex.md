@@ -1,6 +1,6 @@
-# Regular expression
-
 # Basics
+
+## Searching
 
 Find all texts that match a given expression:
 
@@ -11,6 +11,8 @@ Find all texts that match a given expression:
     regex: Pattern = re.compile('a[^ ]*', re.I)
     list_of_matches = regex.findall(text)
     print(','.join(list_of_matches)) # => a,abc,Aaa,a1,a2
+
+## Matching
 
 Test if a texts matches an expression:
 
@@ -26,11 +28,45 @@ Test if a texts matches an expression:
         print(m.group(1)) # => User
         print(m.group(2)) # => Domain.com
 
-## Using options
+Be aware of the impact of the option `MULTILINE`:
 
-Multiple lines:
+The option `MULTILINE` has no impact on "match()" ! See [this example](code/re_multiline_match.py).
 
-    # "\s" is equivalent to "[\t\n\r\f\v]".
+Be aware of the impact of the option `DOTALL`:
+
+And, this is important: by default (unless the option "`DOTALL`" is set), the special character '`.`' matches anything **except a newline**.
+
+Be aware of the impact of "^" and "$":
+
+* "match()" always starts testing matches from the beginning text (the entire text may contain several lines) **whether the expression starts with "^" or not**.
+  That is: '`abc`' is equivalent to '`^abc`'
+
+    * match('^abc', 'abcd') => it matches ("abc")
+    * match('abc',  'abcd') => it matches ("abc")
+
+* "match()" does not stop testing matches until it reaches the end of the text (the entire text may contain several lines), **unless the expression ends with "$"**.
+  That is: '`abc`' is NOT equivalent to '`abc$`'
+
+    * match('abc', 'abcd') => it matches ("abc")
+    * match('abc$', 'abcd') => it does not match
+
+See [this example](code/re_start_stop_match.py).
+
+# Using options
+
+## Multiple lines
+
+First, be aware that:
+
+* by default (unless the option "`DOTALL`" is set), the special character '`.`' matches anything **except a newline**.
+* by "`\s`" is equivalent to "`[ \t\n\r\f\v]`".
+
+* If the option `MULTILINE` is not set, then "`search`" treats the input text as a single bloc.
+* If the option `MULTILINE` is set, then "`search`" treats the input text as a list of lines (each line being a bloc).
+
+
+Exemple:
+
     p: Pattern = re.compile('\\s*(\\w+@\\w+)\\s*(\\w+@\\w+)\\s*', re.MULTILINE)
 
     text: str = """
@@ -43,7 +79,7 @@ Multiple lines:
     print(m.group(1))  # => a@b
     print(m.group(2))  # => c@d
 
-Case insensitive:
+## Case insensitive
 
     p: Pattern = re.compile("(\\w+)", re.IGNORECASE)
     m: Optional[Match] = p.match('abc')
@@ -51,7 +87,7 @@ Case insensitive:
     m: Optional[Match] = p.match('ABC')
     print(m.group(1))  # => ABC
 
-Multiple lines & Case insensitive:
+## Multiple lines & Case insensitive:
 
     Multiline and case insensitive
     p: Pattern = re.compile('\\s*(\\w+)\\s*(\\w+)', re.MULTILINE | re.IGNORECASE)
