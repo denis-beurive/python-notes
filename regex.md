@@ -32,9 +32,7 @@ Be aware of the impact of the option `MULTILINE`:
 
 The option `MULTILINE` has no impact on "match()" ! See [this example](code/re_multiline_match.py).
 
-Be aware of the impact of the option `DOTALL`:
-
-And, this is important: by default (unless the option "`DOTALL`" is set), the special character '`.`' matches anything **except a newline**.
+Be aware of the impact of the option `DOTALL`: by default (unless the option "`DOTALL`" is set), the special character '`.`' matches anything **except a newline**.
 
 Be aware of the impact of "^" and "$":
 
