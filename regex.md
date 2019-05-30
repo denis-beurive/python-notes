@@ -114,6 +114,10 @@ Then:
 * Negative look-ahead  => not followed by...
 * Negative look-behind => not preceded by...
 
+This [example](code/re_look.py) shows the 4 constructions.
+
+> The equivalent [in Perl](code/re_look.pl).
+
 ## Negative look-ahead
 
 See full example [here](code/re_negative_look_ahead.py)
