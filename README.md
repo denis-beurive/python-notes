@@ -67,6 +67,10 @@ DocStrings:
 
 * [CLI parser: Click](https://click.palletsprojects.com/en/7.x/)
 
+**Script examples**:
+
+* [PlantUML automation](code/plantuml_automation.py)
+
 # Other
 
 * [declaring the source encoding](encoding.md)
