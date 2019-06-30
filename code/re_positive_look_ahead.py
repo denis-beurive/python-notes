@@ -23,18 +23,18 @@ def dump_match(tag: str, m: Union[Optional[Match], List[str]]):
 
 # This is positive look ahead.
 
-# a(?:b): "a" followed by "b".
+# a(?=b): "a" followed by "b".
 #
 # Notes:
 #
-# * This expression matches **two and exactly two** characters: "ab".
+# * This expression matches **one and exactly one** character: "a".
 # * An "a" that is not followed by any character is, even more so, not followed by a "b".
 
-p: Pattern = re.compile('a(?:b)')
+p: Pattern = re.compile('a(?=b)')
 m: Optional[Match] = p.match('a')
 dump_match('[1]', m)  # Fails
 
-p: Pattern = re.compile('a(?:b)')
+p: Pattern = re.compile('a(?=b)')
 m: Optional[Match] = p.match('abc')
 dump_match('[2]', m)  # Matches "ab"
 
@@ -42,5 +42,5 @@ dump_match('[2]', m)  # Matches "ab"
 #
 #     [1] no match
 #
-#     [2] 0   : 'ab'
+#     [2] 0   : 'a'
 

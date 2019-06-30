@@ -36,14 +36,14 @@ Be aware of the impact of the option `DOTALL`: by default (unless the option "`D
 
 Be aware of the impact of "^" and "$":
 
-* "match()" always starts testing matches from the beginning text (the entire text may contain several lines) **whether the expression starts with "^" or not**.
-  That is: '`abc`' is equivalent to '`^abc`'
+* "`match()`" always starts testing matches from the beginning text (the entire text may contain several lines) **whether the expression starts with "^" or not**. That is: if you use "`match()`", then '`abc`' is equivalent to '`^abc`' (see [this example](code/re_match_anchor_begin.py)):
 
-    * match('^abc', 'abcd') => it matches ("abc")
-    * match('abc',  'abcd') => it matches ("abc")
+    * match('^abc', 'abcd')  => it matches ("abc")
+    * match('abc',  'abcd')  => it matches ("abc")
+    * match('^abc', '.abcd') => it does not match
+    * match('abc',  '.abcd') => it does not match
 
-* "match()" does not stop testing matches until it reaches the end of the text (the entire text may contain several lines), **unless the expression ends with "$"**.
-  That is: '`abc`' is NOT equivalent to '`abc$`'
+* "`match()`" does not stop testing matches until it reaches the end of the text (the entire text may contain several lines), **unless the expression ends with "$"**. That is: '`abc`' is NOT equivalent to '`abc$`'
 
     * match('abc', 'abcd') => it matches ("abc")
     * match('abc$', 'abcd') => it does not match
@@ -56,8 +56,10 @@ See [this example](code/re_start_stop_match.py).
 
 First, be aware that:
 
-* by default (unless the option "`DOTALL`" is set), the special character '`.`' matches anything **except a newline**.
-* by "`\s`" is equivalent to "`[ \t\n\r\f\v]`".
+* By default (unless the option "`DOTALL`" is set), the special character '`.`' matches anything **except a newline**.
+* "`\s`" is equivalent to "`[ \t\n\r\f\v]`".
+
+`MULTILINE` and `search`:
 
 * If the option `MULTILINE` is not set, then "`search`" treats the input text as a single bloc.
 * If the option `MULTILINE` is set, then "`search`" treats the input text as a list of lines (each line being a bloc).
@@ -118,6 +120,24 @@ This [example](code/re_look.py) shows the 4 constructions.
 
 > The equivalent [in Perl](code/re_look.pl).
 
+## Positive look-ahead
+
+See full example [here](code/re_positive_look_ahead.py)
+
+Look for "a" followed by "b":
+
+    a(?=b)
+
+Please note:
+
+* This expression matches **one and exactly one** characters: "a".
+* An "a" that is not followed by any character is, even more so, not followed by a "b".
+
+Thus:
+
+* `match('a(?=b)', 'a')` fails ("a" is not followed by "b")
+* `match('a(?=b)', 'abc')` matches "a".
+
 ## Negative look-ahead
 
 See full example [here](code/re_negative_look_ahead.py)
@@ -144,23 +164,28 @@ Thus:
     
 > `a(?!b).` is not equivalent to `a(?!b)[^b]`. `[^b]` matches `\n` while `.` (by default) does not.
 
-## Positive look-ahea
+## Positive look-behind
 
-See full example [here](code/re_positive_look_ahead.py)
+Code [here](code/re_positive_look_behind.py)
 
-Look for "a" followed by "b":
-
-    a(?:b)
+Look for "b" preceded by "a":
+    
+    (?<=a)b
 
 Please note:
 
-* This expression matches **two and exactly two** characters: "ab".
-* An "a" that is not followed by any character is, even more so, not followed by a "b".
+* This expression matches **one and exactly one** character: "b".
+* A "b" that is not preceded by any character is, even more so, not preceded by a "a".
 
 Thus:
 
-* `match('a(?:b)', 'a')` fails (We are looking for 2 characters).
-* `match('a(?:b)', 'abc')` matches "ab".
+* `match('(?<=a)b', 'b')` Fails. "b" should not be the first character of the text.
+* `match('(?<=a)b', 'ab')` Fails. "b" is indeed preceded by "a".
+  However, this expression matches **one and exactly one** character: "b".
+  When used with "match", it implies that "b" should be the first character in the text...
+  which is impossible.
+* `search('(?<=a)b', 'ab')` Matches "b". Indeed "search()" does not imply that "b" must be the first character of the text.  
+* `search('a(?<=a)b', 'ab')` Matches "ab". We look for _an "a" followed by a "b" preceded itself by an "a"._
 
 ## Negative look-behind
 
@@ -183,31 +208,9 @@ Thus:
   The is equivalent to '^b'.
 * `match('^(?<!a)b', 'b')` matches.
 * `match('^.(?<!a)b', 'cb')` matches. The text must start with a character other than "a".
+* `match('^.(?<!a)b', 'ab')` fails.
 
 > `.(?<!a)b` is not equivalent to `[^a](?<!a)b`. `[^a]` matches `\n` while `.` (by default) does not.
-
-## Positive look-behind
-
-Code [here](code/re_positive_look_behind.py)
-
-Look for "b" preceded by "a":
-    
-    (?<=a)b
-
-Please note:
-
-* This expression matches **one and exactly one** character: "b".
-* An "b" that is not preceded by any character is, even more so, not preceded by a "a".
-
-Thus:
-
-* `match('(?<=a)b', 'b')` Fails. "b" should not be the first character of the text.
-* `match('(?<=a)b', 'ab')` Fails. "b" is indeed preceded by "a".
-  However, this expression matches **one and exactly one** character: "b".
-  When used with "match", it implies that "b" should be the first character in the text...
-  which is impossible.
-* `search('(?<=a)b', 'ab')` Matches "b". Indeed "search()" does not imply that "b" must be the first character of the text.  
-* `search('a(?<=a)b', 'ab')` Matches "ab". We look for _an "a" followed by a "b" preceded itself by an "a"._
 
 # Lazy
 
@@ -281,7 +284,7 @@ We get it!
     m: Optional[Match] = p.search(text)
     pprint(m.group(0))  # => 'abc\\\ndef \\\nghi'
 
-## Look for a single BEG ... END
+## Look for a single BEGIN ... END
 
     p: Pattern = re.compile('(.)(?<=E)N')
     m: Match = p.match('EN')

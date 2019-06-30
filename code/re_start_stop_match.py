@@ -22,14 +22,31 @@ from pprint import pformat
 #
 #   jkl
 
+# * ?:\\\\\\n: the string "\\\n".
+# * [^\\n]: any character, except the character "newline" ("\n").
+# * ((?:\\\\\\n)|[^\\n]): any character, except the character "newline" ("\n"),
+#                         or the string "\\\n".
+#                         -> That is; a "virtual line".
+#
+# Then consider (...)\\n?(.*):
+#
+# The "virtual line" (first capturing parentheses) stops when we hit a character
+# "newline". The second capturing parentheses will contain the remaining text.
+
+
 ml: Pattern = re.compile('^((?:(?:\\\\\\n)|[^\\n])+)\\n?(.*)')
 
 texts: List[str] = [
+    # Test 1
     ">>> abc",
+
+    # Test 2:
     "\n".join([
         '>>> abc',
         'end'
     ]),
+
+    # Test 3:
     "\n".join([
         '>>> abc \\',
         '    def \\',
@@ -40,12 +57,14 @@ texts: List[str] = [
 
 i = 1
 for text in texts:
-    print(f'> {i}: {pformat(text)}')
+    print(f"### Test {i} ###\n\n{pformat(text)}\n")
     m: Optional[Match] = ml.match(text)
+    print("Result:\n")
     if m is None:
         print("No match\n")
         continue
     for t in m.groups():
+        # We strip the white spaces.
         s = re.sub('\\s*\\\\\\n\\s*', ' ', t)
         print(pformat(s))
     print('')
@@ -53,14 +72,29 @@ for text in texts:
 
 # Result:
 #
-#     > 1: '>>> abc'
-#     '>>> abc'
-#     ''
+# ### Test 1 ###
 #
-#     > 2: '>>> abc\nend'
-#     '>>> abc'
-#     'end'
+# '>>> abc'
 #
-#     > 3: '>>> abc \\\n    def \\\n    ghi\nend'
-#     '>>> abc def ghi'
-#     'end'
+# Result:
+#
+# '>>> abc'
+# ''
+#
+# ### Test 2 ###
+#
+# '>>> abc\nend'
+#
+# Result:
+#
+# '>>> abc'
+# 'end'
+#
+# ### Test 3 ###
+#
+# '>>> abc \\\n    def \\\n    ghi\nend'
+#
+# Result:
+#
+# '>>> abc def ghi'
+# 'end'

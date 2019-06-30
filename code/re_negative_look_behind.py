@@ -53,6 +53,11 @@ p: Pattern = re.compile('^.(?<!a)b')
 r: List[str] = p.match('cb')
 dump_match('[5]', r)  # Match
 
+p: Pattern = re.compile('^.(?<!a)b')
+r: List[str] = p.match('ab')
+dump_match('[6]', r)  # Won't match
+
+
 # Result:
 #
 #     [1] no match
@@ -64,6 +69,10 @@ dump_match('[5]', r)  # Match
 #     [4] 0   : 'b'
 #
 #     [5] 0   : 'cb'
+#
+#     [6] no match
+
+
 
 
 
