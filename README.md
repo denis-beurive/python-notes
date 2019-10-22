@@ -7,6 +7,7 @@ This repository contains some Python notes.
 * [pipenv](pipenv.md)
 * [pycharm](pycharm.md)
 * [unittest](unittest.md)
+* [wheel](https://github.com/denis-beurive/pywheel)
 
 ## Style guides
 
