@@ -100,7 +100,10 @@ Please note that prior to and after running the command, you should inspect the 
 
     pipenv install -e .
 
-> See [this tutorial](https://python-packaging.readthedocs.io/en/latest/minimal.html).
+For more information:
+
+* See [Editable/developer mode](https://github.com/denis-beurive/pywheel/blob/master/doc/dist_installation.md)
+* See [this tutorial](https://python-packaging.readthedocs.io/en/latest/minimal.html).
 
 ### Print the list of all installed dependencies
 
