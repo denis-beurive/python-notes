@@ -111,15 +111,27 @@ Please note that prior to and after running the command, you should inspect the 
 ## Create a "virtual environment / project"
 
     cd /the/project/directory
-    pipenv install --python 3.6.4
+    pipenv install --python 3.6.7
+    # or simply:
+    pipenv install --python 3
+
+Please note that this command will **not** download and install the required version of Python (3.6.7) on our system. It assumes that the required version of Python is already installed on your system.
+For example: `/usr/bin/python3 --version` => `Python 3.6.7`.
+
+The short version of the above command (`pipenv install --python 3`) will search for an installed version of Python "3.x.x".
+
+> **IMPORTANT**: if the above command does not work, make sure that a file called "`Pipfile`" does not exist in a parent directory of "`/the/project/directory`".
+
+Or you can directly specify the path to the interpreter to use: 
+
+    cd /the/project/directory
+    pipenv --python /path/to/the/python/interpreter
+    # ex: pipenv --python /usr/bin/python3
+    #     /usr/bin/python3 --version => Python 3.6.7
 
 > See [this link](https://pipenv.readthedocs.io/en/latest/) for all the available options.
 
 This will create two new files, `Pipfile` and `Pipfile.lock`, in your project directory, and a new virtual environment for your project if it doesn’t exist already.
-
-> Here, we specify that we want to use Python version `3.6.4` (instead of the default version of Python available on this host).
-
-> This command assumes that `python 3.6.4` is already installed.
 
 Once a "_virtual environment / project_" has been created, we can activate it. See [Activate a virtual environment](#activate-a-virtual-environment).
 
@@ -238,7 +250,7 @@ If you requested the installation of an unknown package, then remove it from the
 
 ## Step 2: clear the lock file and reinstall all dependencies
 
-    pipenv --clear lock && pipenv install
+    pipenv lock --clear && pipenv install
 
 ## Step 3 : print the list of all installed dependencies
 
