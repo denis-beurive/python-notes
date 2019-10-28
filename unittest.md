@@ -42,6 +42,8 @@ Then, you can run:
 
 ### Automatisation
 
+#### Using unittest discover
+
 Let's say that the unit tests files are located under the directory `tests`.
 
     .
@@ -73,3 +75,9 @@ Please note:
 
 * The option `-s` specifies the path to the unit tests implementations.
 * The option `-p` defines the naming scheme that applies to a unit test implementation.
+
+#### Use xmlrunner
+
+Install `xmlrunner`:
+
+    pipenv install xmlrunner

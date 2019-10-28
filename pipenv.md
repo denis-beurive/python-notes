@@ -78,9 +78,28 @@ This command can be really useful.
 
     pipenv install <name of the package>
 
+or
+
+    pipenv install --dev <name of the package>
+
+In the file `Pipfile` you see:
+
+  [dev-packages]
+  xmlrunner = "*"
+
+  [packages]
+  wheel = "*"
+  setuptools = "*"
+
+> Please note that you can specify an environment other than "dev".
+
 Example:
 
     pipenv install pytest
+
+or
+
+    pipenv install --dev pytest
 
 ### Update a package
 
@@ -102,6 +121,7 @@ Please note that prior to and after running the command, you should inspect the 
 
 For more information:
 
+* See [Editable Dependencies](https://pipenv-fork.readthedocs.io/en/latest/basics.html#editable-dependencies-e-g-e).
 * See [Editable/developer mode](https://github.com/denis-beurive/pywheel/blob/master/doc/dist_installation.md)
 * See [this tutorial](https://python-packaging.readthedocs.io/en/latest/minimal.html).
 
@@ -206,6 +226,22 @@ Then, within the python script:
     $ ls -l $(pipenv --py)
     lrwxrwxrwx 1 dev dev 9 Feb 28 10:47 /home/dev/.local/share/virtualenvs/tmp-SWmmaX4T/bin/python -> python3.6
 
+## Install the dependencies
+
+    pipenv install
+    
+or
+
+    pipenv install --dev
+
+## Generate the requirements files
+
+    pipenv lock --requirements > requirements.txt
+
+or
+
+    pipenv lock --requirements --dev > requirements-dev.txt
+S
 # Pycharm
 
 ## Pipenv on a remote host with PyCharm (2018.3)
