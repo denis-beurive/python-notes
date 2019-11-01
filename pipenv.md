@@ -119,6 +119,10 @@ Please note that prior to and after running the command, you should inspect the 
 
     pipenv install -e .
 
+Or:
+
+    pipenv install -e . --dev
+
 For more information:
 
 * See [Editable Dependencies](https://pipenv-fork.readthedocs.io/en/latest/basics.html#editable-dependencies-e-g-e).
@@ -175,6 +179,10 @@ To run the command below, you must be in the project directory tree (which conta
     bin  include  lib
 
 As you can see, the directory contains all the "elements" that defines a Python environment.
+
+If you want to get the path to a specific module:
+
+  python -c "import my_package.my_module; print(my_package.my_module.__file__)"
 
 ## Activate a virtual environment
 
@@ -234,6 +242,15 @@ or
 
     pipenv install --dev
 
+Please see the file `Pipfile`:
+
+  [dev-packages]
+  xmlrunner = "*"
+
+  [packages]
+  wheel = "*"
+  setuptools = "*"
+
 ## Generate the requirements files
 
     pipenv lock --requirements > requirements.txt
@@ -241,7 +258,16 @@ or
 or
 
     pipenv lock --requirements --dev > requirements-dev.txt
-S
+
+Please see the file `Pipfile`:
+
+  [dev-packages]
+  xmlrunner = "*"
+
+  [packages]
+  wheel = "*"
+  setuptools = "*"
+
 # Pycharm
 
 ## Pipenv on a remote host with PyCharm (2018.3)
