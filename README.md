@@ -46,7 +46,7 @@ DocStrings:
 * [comprehensions](comprehensions.md)
 * [generator expression](generator_expression.md)
 * [named tuple](namedtuple.md)
-* [excpetion](excpetion.md)
+* [exception](exception.md)
 * [object](object.md)
 * [sorting](sorting.md)
 * [module](module.md)
