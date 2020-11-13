@@ -50,6 +50,9 @@ DocStrings:
 * [object](object.md)
 * [sorting](sorting.md)
 * [module](module.md)
+* [socket](socket.md)
+* [closure](code/closure.py)
+* [filters](code/filters.py)
 
 # Design patterns
 

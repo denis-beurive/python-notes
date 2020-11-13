@@ -41,3 +41,28 @@ Result:
 
     t is a list
 
+
+# Using yield
+
+Write a generator that takes 2 parameters:
+* a value `x`
+* a function `f(x)`
+
+The generator must return: `x`, `f(x)`, `f(f(x))`, `f(f(f(x)))`... 
+
+
+    import typing
+    
+    # x, f(x), f(f(x)), f(f(f(x)))...
+    def fgen(f: typing.Callable[[typing.Any], typing.Any], x: typing.Any) \
+            -> typing.Generator[typing.Any, None, None]:
+        while True:
+            yield x
+            x = f(x)
+    
+    
+    # Expected: 3, 2*3, 2*2*3, 2*2*2*3
+    for counter, value in enumerate(fgen(lambda x: 2*x, 3)):
+        print(f"{counter:d}: {value:d}")
+
+
