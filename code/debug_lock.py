@@ -1,11 +1,23 @@
-from typing import Optional, Union
-from threading import Lock, RLock
+from typing import Optional, Union, TextIO
+from threading import Lock, RLock, get_ident
 
 
 class BaseLock(object):
     """
     Base class for all extended locks.
     """
+
+    __lock_fd: RLock = RLock()
+    __shared_fd: TextIO = None
+
+    @staticmethod
+    def init(path: str) -> None:
+        BaseLock.__shared_fd = open(path, "w")
+
+    @staticmethod
+    def log(message: str) -> None:
+        with BaseLock.__lock_fd:
+            BaseLock.__shared_fd.write(message + "\n")
 
     def __init__(self, in_lock: Union[Lock, RLock], in_resource: Optional[str] = None):
         """
@@ -55,21 +67,19 @@ class BaseLock(object):
         return self
 
     def acquire(self):
-        print("acquired", self)
         self._lock.acquire()
 
     def release(self):
-        print("released", self)
         self._lock.release()
 
     def __enter__(self):
-        print('"{}" acquires "{}"'.format(self.locker if self.locker is not None else "locker is not set",
-                                          self.resource if self.resource is not None else "resource is not set"))
+        BaseLock.log('"{}: {}" acquires "{}"'.format(get_ident(), self.locker if self.locker is not None else "locker is not set",
+                                                     self.resource if self.resource is not None else "resource is not set"))
         self.acquire()
 
     def __exit__(self, type, value, traceback):
-        print('"{}" releases "{}"'.format(self.locker if self.locker is not None else "locker is not set",
-                                          self.resource if self.resource is not None else "resource is not set"))
+        BaseLock.log('"{}: {}" releases "{}"'.format(get_ident(), self.locker if self.locker is not None else "locker is not set",
+                                                     self.resource if self.resource is not None else "resource is not set"))
         self.release()
 
 
@@ -83,3 +93,6 @@ class ExtRLock(BaseLock):
 
     def __init__(self, in_resource: Optional[str] = None):
         super().__init__(RLock(), in_resource)
+
+
+
