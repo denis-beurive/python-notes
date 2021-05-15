@@ -67,6 +67,7 @@ DocStrings:
 * [base64](base64.md)
 * [flask](flask.md)
 * [uuid - get a unique ID](uniqid.md)
+* [threading](lock.md)
 
 **Good packages**:
 
