@@ -72,9 +72,10 @@ DocStrings:
 
 * [CLI parser: Click](https://click.palletsprojects.com/en/7.x/)
 
-**Script examples**:
+# Script examples
 
 * [PlantUML automation](code/plantuml_automation.py)
+* [Visit all entries within a data structure](code/data_walk.py)
 
 # Other
 
