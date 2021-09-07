@@ -68,6 +68,7 @@ DocStrings:
 * [flask](flask.md)
 * [uuid - get a unique ID](uniqid.md)
 * [threading](lock.md)
+* [datetile](datetime.md)
 
 **Good packages**:
 
