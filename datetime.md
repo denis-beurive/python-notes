@@ -7,12 +7,38 @@ Sometimes you need to convert timestamps given as strings to objects or integers
 ```python
 import datetime
 
-date_time_str = '2021-09-01T15:21:00.408899+0000'
-d = datetime.datetime.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S.%f%z')
-timestamp = d.strptime(date_time_str, '%Y-%m-%dT%H:%M:%S.%f%z').timestamp()
-t_to_str = datetime.datetime.fromtimestamp(timestamp, tz=d.tzinfo).strftime('%Y-%m-%dT%H:%M:%S.%f%z')
-print(t_to_str)
-assert date_time_str == t_to_str
+now_localized = datetime.datetime.now(tz=datetime.timezone.utc).astimezone()
+
+event_date_text = '2021-09-01T15:21:00.408899+0000'
+event_date_object = datetime.datetime.strptime(event_date_text, '%Y-%m-%dT%H:%M:%S.%f%z')
+event_unix_timestamp = event_date_object.strptime(event_date_text, '%Y-%m-%dT%H:%M:%S.%f%z').timestamp()
+
+spr_timestamp_with_local_tz = datetime.datetime.fromtimestamp(event_unix_timestamp,
+                                                              tz=now_localized.tzinfo).strftime('%Y-%m-%dT%H:%M:%S.%f%z')
+spr_timestamp_with_event_tz = datetime.datetime.fromtimestamp(event_unix_timestamp,
+                                                              tz=event_date_object.tzinfo).strftime('%Y-%m-%dT%H:%M:%S.%f%z')
+spr_timestamp_without_tz = datetime.datetime.fromtimestamp(event_unix_timestamp).strftime('%Y-%m-%dT%H:%M:%S.%f%z')
+
+print("event timestamp:  {}".format(event_date_text))
+print("event TZ:         {} ({})".format(event_date_object.utcoffset().seconds, event_date_object.tzname()))
+print("local TZ:         {} ({})".format(now_localized.utcoffset().seconds, now_localized.tzname()))
+print("with local TZ:    {}".format(spr_timestamp_with_local_tz))
+print("with event TZ:    {}".format(spr_timestamp_with_event_tz))
+print("without TZ:       {}".format(spr_timestamp_without_tz))
+```
+
+Execution:
+
+```bash
+$ python --version
+Python 3.9.5
+$ python test.py 
+event timestamp:  2021-09-01T15:21:00.408899+0000
+event TZ:         0 (UTC)
+local TZ:         7200 (CEST)
+with local TZ:    2021-09-01T17:21:00.408899+0200
+with event TZ:    2021-09-01T15:21:00.408899+0000
+without TZ:       2021-09-01T17:21:00.408899
 ```
 
 Generalization:
