@@ -78,6 +78,7 @@ DocStrings:
 
 * [PlantUML automation](code/plantuml_automation.py)
 * [Visit all entries within a data structure](code/data_walk.py)
+* [Calculate fingerprints of all files within a given directory](code/md5src.py)
 
 # Other
 
