@@ -79,6 +79,7 @@ DocStrings:
 * [PlantUML automation](code/plantuml_automation.py)
 * [Visit all entries within a data structure](code/data_walk.py)
 * [Calculate fingerprints of all files within a given directory](code/md5src.py)
+* Redis [producer](code/redis_producer.py) and [consumer](code/redis_consumer.py)
 
 # Other
 
