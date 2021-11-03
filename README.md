@@ -81,6 +81,7 @@ DocStrings:
 * [Calculate fingerprints of all files within a given directory](code/md5src.py)
 * Redis [producer](code/redis_producer.py) and [consumer](code/redis_consumer.py)
 * [Timestamps comparaison](code/timestamp_cmp.py)
+* [Fun with QR codes](code/qrcode_ex.py)
 
 # Other
 
